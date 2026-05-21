@@ -14,11 +14,12 @@
 | Skill | Nivell | Evidència | Proper pas |
 |-------|--------|-----------|------------|
 | Python — Variables | 5/10 | Aplicades amb autonomia en múltiples scripts | Funcions |
-| Python — Tipus | 5/10 | Casting fluid i sense errors | Llistes |
+| Python — Tipus | 5/10 | Casting fluid i sense errors | Diccionaris |
 | Python — Condicions | 5/10 | Aplicades autònomament i combinades | Combinació complexa |
-| Python — Bucles | 4/10 | `for` i `while` funcionant, validació autònoma | Llistes + bucles, parells/senars |
+| Python — Bucles | 6/10 | Acumuladors, bug de sobreescriptura detectat i resolt autònomament | Bucles amb diccionaris |
+| Python — Llistes | 4/10 | Creació, accés, append, recorregut, cerca, índexs negatius | `.remove()`, diccionaris |
 | Terminal | 5/10 | Navegació autònoma, errors resolts sols | Permisos i pipes |
-| Git | 3/10 | Primer commit real: `init`, `add`, `commit`, `status` | Push a GitHub |
+| Git | 4/10 | Commits regulars amb missatges descriptius, coneixement de staging area | Push a GitHub |
 | Web | 2/10 | HTML bàsic | DevTools |
 | Seguretat | 1/10 | Nocions | Laboratori futur |
 | OSINT | 3/10 | Google ops | Automatitzar |
@@ -81,10 +82,44 @@ Progressió sòlida. Bona capacitat d'inferència i transferència. Cal continua
 
 ---
 
+## SESSIÓ 3 — Resum
+
+**Data:** 21/05/2026
+
+**Contingut treballat:**
+- Operador mòdul `%`: residu de la divisió, detecció de parells i senars
+- Variables acumuladores: `parells = parells + 1` vs `parells = + 1`
+- Refactorització: eliminar `int()` redundant en operacions entre enters
+- Números màgics: per què cal evitar-los i com substituir-los per `len()`
+- Llistes: creació buida `[]`, accés per índex, índexs negatius `[-1]`
+- Mètodes de llista: `.append()`, `.remove()`
+- `len()` per obtenir la mida d'una llista
+- Recórrer llistes: per valor (`for element in llista`) vs per índex (`for i in range(len(llista))`)
+- Operador `in` per comprovar si un element és dins una col·lecció
+- Simplificació pythònica: `if resultat:` en lloc de `if resultat == True:`
+- Bug clàssic de sobreescriptura en bucles de cerca — detectat i resolt autònomament
+
+**Projecte construït:**
+- `llistes.py` — gestió d'una llista de noms: afegir, mostrar, numerar, cercar
+
+**Errors principals:**
+- Bug de sobreescriptura al bucle de cerca (`else` dins el bucle sobreescrivia el resultat correcte)
+- `llista[]` en lloc de `llista = []` per crear una llista buida
+
+**Transferència autònoma destacada:**
+Ha detectat i resolt el bug de sobreescriptura sense ajuda del tutor. Ha simplificat `if resultat == True:` a `if resultat:` de forma espontània. ⭐⭐
+
+**Observació del tutor:**
+Sessió molt sòlida. Millora notable en autonomia de depuració. El raonament sobre per què triar opció B (càlcul de senars per deducció) demostra pensament algorítmic real. Pendent consolidar el concepte de número màgic.
+
+---
+
 ## DEURES PENDENTS
 
-- Modificar `bucles.py` afegint, després de la taula, un recompte de quants resultats són **parells** i quants **senars** (investigar l'operador mòdul `%`)
-- Fer `git add` i `git commit` dels apunts de sessió guardats a `Projectes`
+- Afegir al `llistes.py` funcionalitat per **eliminar** un nom de la llista amb `.remove()`:
+  - Si el nom existeix → elimina'l i mostra la llista actualitzada
+  - Si no existeix → ho indica
+- `git add` i `git commit -m "missatge descriptiu"` de tot (llistes.py + apunts_sessio3.md)
 
 ---
 
@@ -95,7 +130,7 @@ Progressió sòlida. Bona capacitat d'inferència i transferència. Cal continua
 |---------|-----------|-------|
 | 1-2 | Variables, tipus, funcions, condicions | ✅ Completat |
 | 2-3 | Bucles `for` i `while`, `range`, f-strings avançades | ✅ Completat |
-| 3-4 | Llistes, diccionaris, fitxers | ⏳ Pendent |
+| 3-4 | Llistes, diccionaris, fitxers | 🔄 En curs |
 | 4-5 | Terminal Linux, Git (push a GitHub) | 🔄 En curs |
 | 6-7 | Funcions, mòduls, errors, debugging | ⏳ Pendent |
 | 7-8 | Scraping, automatització bàsica | ⏳ Pendent |
