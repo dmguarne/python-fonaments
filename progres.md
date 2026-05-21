@@ -13,13 +13,15 @@
 
 | Skill | Nivell | Evidència | Proper pas |
 |-------|--------|-----------|------------|
-| Python — Variables | 5/10 | Aplicades amb autonomia en múltiples scripts | Funcions |
-| Python — Tipus | 5/10 | Casting fluid i sense errors | Diccionaris |
+| Python — Variables | 5/10 | Aplicades amb autonomia en múltiples scripts | Funcions ✅ |
+| Python — Tipus | 5/10 | Casting fluid i sense errors | Diccionaris ✅ |
 | Python — Condicions | 5/10 | Aplicades autònomament i combinades | Combinació complexa |
 | Python — Bucles | 6/10 | Acumuladors, bug de sobreescriptura detectat i resolt autònomament | Bucles amb diccionaris |
-| Python — Llistes | 4/10 | Creació, accés, append, recorregut, cerca, índexs negatius | `.remove()`, diccionaris |
+| Python — Llistes | 6/10 | `.remove()`, cerca, esborrat amb patró bandera, refactorització | Llistes de diccionaris |
+| Python — Funcions | 4/10 | Definició, paràmetres, crida — primer ús real, convenció d'ordre | `return`, funcions amb múltiples paràmetres |
+| Python — Diccionaris | 3/10 | Creació, accés, modificació, `.items()`, recorregut | Llistes de diccionaris, cerca per clau |
 | Terminal | 5/10 | Navegació autònoma, errors resolts sols | Permisos i pipes |
-| Git | 4/10 | Commits regulars amb missatges descriptius, coneixement de staging area | Push a GitHub |
+| Git | 5/10 | Commits regulars amb missatges descriptius, hàbit consolidat | Push a GitHub |
 | Web | 2/10 | HTML bàsic | DevTools |
 | Seguretat | 1/10 | Nocions | Laboratori futur |
 | OSINT | 3/10 | Google ops | Automatitzar |
@@ -114,12 +116,44 @@ Sessió molt sòlida. Millora notable en autonomia de depuració. El raonament s
 
 ---
 
+## SESSIÓ 4 — Resum
+
+**Data:** 21/05/2026
+
+**Contingut treballat:**
+- Repàs bug de sobreescriptura aplicat a `.remove()` — resolt autònomament
+- Principi DRY (Don't Repeat Yourself): identificació de codi duplicat
+- Funcions: `def`, paràmetres, crida, convenció d'ordre al fitxer
+- Refactorització de `llistes.py`: bloc repetit convertit en funció `enumerar(llista)`
+- Diccionaris: creació, accés per clau, afegir, modificar, `.items()`, recorregut
+- Diferència conceptual llista vs diccionari: posició vs nom del camp
+- Comportament temporal del diccionari: reflecteix l'estat en cada moment d'execució
+
+**Projectes construïts:**
+- `llistes.py` refactoritzat — funció `enumerar()`, esborrat amb patró bandera
+- `contactes.py` — diccionari d'una persona, accés, modificació, recorregut amb `.items()`
+
+**Errors principals:**
+- Bug de sobreescriptura al `.remove()` (resolt autònomament sense ajuda del tutor)
+- Funció definida al mig del fitxer en lloc de dalt de tot (detectat i corregit)
+
+**Transferència autònoma destacada:**
+Ha deduït per si sol per què existeixen les funcions a partir del problema del codi duplicat. Ha resolt el bug de sobreescriptura aplicant el patró après a la sessió anterior sense que el tutor li ho recordés. ⭐⭐⭐
+
+**Observació del tutor:**
+Sessió excel·lent. Autonomia creixent i molt notable. El salt qualitatiu més important fins ara: no només aplica el que se li explica, sinó que **generalitza patrons** i els reutilitza en contextos nous. Preparat per al primer exercici que combina llistes + diccionaris + funcions.
+
+---
+
 ## DEURES PENDENTS
 
-- Afegir al `llistes.py` funcionalitat per **eliminar** un nom de la llista amb `.remove()`:
-  - Si el nom existeix → elimina'l i mostra la llista actualitzada
-  - Si no existeix → ho indica
-- `git add` i `git commit -m "missatge descriptiu"` de tot (llistes.py + apunts_sessio3.md)
+Crea un script nou: `agenda.py`
+
+1. Crear una **llista de diccionaris** — cada element és un diccionari amb `nom`, `edat` i `ciutat`
+2. Afegir **3 contactes** a la llista
+3. Mostrar tots els contactes numerats amb una funció `mostrar_agenda(agenda)`
+4. Permetre a l'usuari **cercar** un contacte pel nom i mostrar totes les seves dades si el troba
+5. `git add` i `git commit -m "missatge descriptiu"`
 
 ---
 
@@ -128,11 +162,11 @@ Sessió molt sòlida. Millora notable en autonomia de depuració. El raonament s
 ### FASE 1 — Fonaments Python + Terminal *(en curs)*
 | Setmana | Contingut | Estat |
 |---------|-----------|-------|
-| 1-2 | Variables, tipus, funcions, condicions | ✅ Completat |
+| 1-2 | Variables, tipus, condicions | ✅ Completat |
 | 2-3 | Bucles `for` i `while`, `range`, f-strings avançades | ✅ Completat |
-| 3-4 | Llistes, diccionaris, fitxers | 🔄 En curs |
+| 3-4 | Llistes, diccionaris, funcions | 🔄 En curs |
 | 4-5 | Terminal Linux, Git (push a GitHub) | 🔄 En curs |
-| 6-7 | Funcions, mòduls, errors, debugging | ⏳ Pendent |
+| 6-7 | Fitxers, mòduls, errors, debugging | ⏳ Pendent |
 | 7-8 | Scraping, automatització bàsica | ⏳ Pendent |
 
 ### FASE 2 — Web i APIs *(pendent)*
