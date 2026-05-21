@@ -13,11 +13,12 @@
 
 | Skill | Nivell | Evidència | Proper pas |
 |-------|--------|-----------|------------|
-| Python — Variables | 4/10 | Script interactiu amb input() i casting | Funcions |
-| Python — Tipus | 4/10 | Casting comprès i aplicat | Llistes |
-| Python — Condicions | 4/10 | if/elif/else funcionant | Bucles |
-| Terminal | 4/10 | bashrc reparat, navegació autònoma | Permisos i pipes |
-| Git | 0/10 | Cap exposició | Pròxima sessió |
+| Python — Variables | 5/10 | Aplicades amb autonomia en múltiples scripts | Funcions |
+| Python — Tipus | 5/10 | Casting fluid i sense errors | Llistes |
+| Python — Condicions | 5/10 | Aplicades autònomament i combinades | Combinació complexa |
+| Python — Bucles | 4/10 | `for` i `while` funcionant, validació autònoma | Llistes + bucles, parells/senars |
+| Terminal | 5/10 | Navegació autònoma, errors resolts sols | Permisos i pipes |
+| Git | 3/10 | Primer commit real: `init`, `add`, `commit`, `status` | Push a GitHub |
 | Web | 2/10 | HTML bàsic | DevTools |
 | Seguretat | 1/10 | Nocions | Laboratori futur |
 | OSINT | 3/10 | Google ops | Automatitzar |
@@ -52,10 +53,38 @@ Ha après condicions sense explicació prèvia. Bona capacitat d'inferència. Ca
 
 ---
 
+## SESSIÓ 2 — Resum
+
+**Data:** 21/05/2026
+
+**Contingut treballat:**
+- Repàs bucle `while` i lògica d'indentació
+- Bucle `for`: sintaxi, iteració sobre llistes
+- `range()`: generació de seqüències, límit superior exclòs
+- F-strings amb expressions directes dins `{}`
+- Git: conceptes fonamentals (repositori, commit, staging area, branch)
+- Git: comandes `init`, `status`, `add *`, `commit -m`
+- Primer commit real del repositori `Projectes`
+
+**Projecte construït:**
+- `bucles.py` — taula de multiplicar amb input de l'usuari, validació `while` i `for` + `range`
+
+**Errors principals:**
+- Cometes dins f-string (tanca la cadena prematurament)
+- `git commit` executat fora de la carpeta del repositori (`fatal: no és un repositori`)
+
+**Transferència autònoma destacada:**
+Ha afegit validació `while` al `bucles.py` sense que el tutor ho demanés. Aplicació espontània de coneixement de la sessió anterior. ⭐
+
+**Observació del tutor:**
+Progressió sòlida. Bona capacitat d'inferència i transferència. Cal continuar consolidant l'hàbit d'intentar abans de preguntar — en aquesta sessió ha mirat la solució abans d'intentar-ho del tot.
+
+---
+
 ## DEURES PENDENTS
 
-- Afegir bucle while al `presentacio.py` que validi que l'edat és entre 0 i 120
-- Pròxima sessió: Git primer commit
+- Modificar `bucles.py` afegint, després de la taula, un recompte de quants resultats són **parells** i quants **senars** (investigar l'operador mòdul `%`)
+- Fer `git add` i `git commit` dels apunts de sessió guardats a `Projectes`
 
 ---
 
@@ -64,10 +93,12 @@ Ha après condicions sense explicació prèvia. Bona capacitat d'inferència. Ca
 ### FASE 1 — Fonaments Python + Terminal *(en curs)*
 | Setmana | Contingut | Estat |
 |---------|-----------|-------|
-| 1-2 | Variables, tipus, funcions, condicions | ✅ En curs |
-| 3-4 | Bucles, llistes, diccionaris, fitxers | ⏳ Pendent |
-| 5-6 | Terminal Linux, Git, Bash | ⏳ Pendent |
-| 7-8 | Mòduls, errors, debugging, scraping | ⏳ Pendent |
+| 1-2 | Variables, tipus, funcions, condicions | ✅ Completat |
+| 2-3 | Bucles `for` i `while`, `range`, f-strings avançades | ✅ Completat |
+| 3-4 | Llistes, diccionaris, fitxers | ⏳ Pendent |
+| 4-5 | Terminal Linux, Git (push a GitHub) | 🔄 En curs |
+| 6-7 | Funcions, mòduls, errors, debugging | ⏳ Pendent |
+| 7-8 | Scraping, automatització bàsica | ⏳ Pendent |
 
 ### FASE 2 — Web i APIs *(pendent)*
 ### FASE 3 — Sistemes i Linux *(pendent)*
