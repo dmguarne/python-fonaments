@@ -1,0 +1,17 @@
+[
+    {
+        "nom": "David",
+        "edat": 39,
+        "ciutat": "Barcelona"
+    },
+    {
+        "nom": "Maria",
+        "edat": 24,
+        "ciutat": "Girona"
+    },
+    {
+        "nom": "Antoni",
+        "edat": 55,
+        "ciutat": "Mataró"
+    }
+]
