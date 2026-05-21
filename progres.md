@@ -2,10 +2,10 @@
 
 ## PERFIL
 - **Nom:** David
-- **Nivell assignat:** PRINCIPIANT
+- **Nivell assignat:** PRINCIPIANT**→INTERMEDI** (transició en curs)
 - **Objectiu:** Curiositat i feina
 - **Hores setmanals:** 10
-- **Risc detectat:** Tutorial hell — tendència a consumir sense construir
+- **Risc detectat:** Tutorial hell — tendència a consumir sense construir *(risc reduït: 5 sessions consecutives construint codi real)*
 
 ---
 
@@ -13,14 +13,14 @@
 
 | Skill | Nivell | Evidència | Proper pas |
 |-------|--------|-----------|------------|
-| Python — Variables | 5/10 | Aplicades amb autonomia en múltiples scripts | Funcions ✅ |
-| Python — Tipus | 5/10 | Casting fluid i sense errors | Diccionaris ✅ |
+| Python — Variables | 5/10 | Aplicades amb autonomia en múltiples scripts | — |
+| Python — Tipus | 5/10 | Casting fluid i sense errors | — |
 | Python — Condicions | 5/10 | Aplicades autònomament i combinades | Combinació complexa |
-| Python — Bucles | 6/10 | Acumuladors, bug de sobreescriptura detectat i resolt autònomament | Bucles amb diccionaris |
-| Python — Llistes | 6/10 | `.remove()`, cerca, esborrat amb patró bandera, refactorització | Llistes de diccionaris |
-| Python — Funcions | 4/10 | Definició, paràmetres, crida — primer ús real, convenció d'ordre | `return`, funcions amb múltiples paràmetres |
-| Python — Diccionaris | 3/10 | Creació, accés, modificació, `.items()`, recorregut | Llistes de diccionaris, cerca per clau |
-| Terminal | 5/10 | Navegació autònoma, errors resolts sols | Permisos i pipes |
+| Python — Bucles | 6/10 | Acumuladors, bugs resolts autònomament | `enumerate` |
+| Python — Llistes | 7/10 | Llistes de diccionaris, accés encadenat, refactorització | Llistes per comprensió |
+| Python — Funcions | 6/10 | `return`, Single Responsibility, codi autodocumentat, variables globals detectades | Funcions amb valors per defecte |
+| Python — Diccionaris | 5/10 | Accés encadenat, llistes de diccionaris, cerca per clau | Diccionaris niats |
+| Terminal | 5/10 | Navegació autònoma | Permisos i pipes |
 | Git | 5/10 | Commits regulars amb missatges descriptius, hàbit consolidat | Push a GitHub |
 | Web | 2/10 | HTML bàsic | DevTools |
 | Seguretat | 1/10 | Nocions | Laboratori futur |
@@ -145,15 +145,41 @@ Sessió excel·lent. Autonomia creixent i molt notable. El salt qualitatiu més 
 
 ---
 
+## SESSIÓ 5 — Resum
+
+**Data:** 21/05/2026
+
+**Contingut treballat:**
+- Revisió i depuració de `agenda.py` (deures de la sessió 4)
+- Detecció i correcció de variable global dins funció — passar-ho com a paràmetre
+- Accés encadenat a llistes de diccionaris: `agenda[i]["clau"]`
+- `return` vs `print`: diferència conceptual i pràctica
+- Principi Single Responsibility: cada funció fa una cosa
+- Tensió DRY vs Single Responsibility — resolució per disseny
+- Codi autodocumentat: el nom de la funció com a documentació
+- `enumerate()` — introduït per investigació autònoma
+
+**Projecte construït:**
+- `agenda.py` final — llista de diccionaris, dues funcions (`mostrar_persona` amb `return`, `mostrar_agenda`), cerca per nom amb patró bandera
+
+**Errors principals:**
+- `if trobat == False` en lloc de `if not trobat` (corregit)
+- Variable global `agenda` dins `mostrar_persona` sense paràmetre (detectat i corregit)
+- `return(f"...")` amb parèntesis innecessaris (corregit)
+
+**Transferència autònoma destacada:**
+Ha raonat autònomament la tensió entre DRY i Single Responsibility. Ha defensat decisions de disseny amb argumentació tècnica real ("depèn de per a què serveixi"). ⭐⭐⭐
+
+**Observació del tutor:**
+Sessió de maduresa. El salt no és de sintaxi sinó conceptual: ha après a pensar en responsabilitats i a prendre decisions de disseny conscients. Progressió que justifica revisar el nivell assignat cap a intermedi en les properes sessions.
+
+---
+
 ## DEURES PENDENTS
 
-Crea un script nou: `agenda.py`
+Refactoritza `agenda.py` substituint `for i in range(len(agenda))` per `enumerate()` a les dues funcions i al bucle de cerca.
 
-1. Crear una **llista de diccionaris** — cada element és un diccionari amb `nom`, `edat` i `ciutat`
-2. Afegir **3 contactes** a la llista
-3. Mostrar tots els contactes numerats amb una funció `mostrar_agenda(agenda)`
-4. Permetre a l'usuari **cercar** un contacte pel nom i mostrar totes les seves dades si el troba
-5. `git add` i `git commit -m "missatge descriptiu"`
+Investiga la sintaxi de `enumerate()` i aplica-la. Després: `git commit -m "missatge descriptiu"`.
 
 ---
 
@@ -164,7 +190,7 @@ Crea un script nou: `agenda.py`
 |---------|-----------|-------|
 | 1-2 | Variables, tipus, condicions | ✅ Completat |
 | 2-3 | Bucles `for` i `while`, `range`, f-strings avançades | ✅ Completat |
-| 3-4 | Llistes, diccionaris, funcions | 🔄 En curs |
+| 3-4 | Llistes, diccionaris, funcions | ✅ Completat |
 | 4-5 | Terminal Linux, Git (push a GitHub) | 🔄 En curs |
 | 6-7 | Fitxers, mòduls, errors, debugging | ⏳ Pendent |
 | 7-8 | Scraping, automatització bàsica | ⏳ Pendent |
