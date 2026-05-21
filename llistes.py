@@ -21,10 +21,34 @@ resultat = False
 for i in range(len(llista)):
     if llista[i] == cerca:
         resultat = True
-if resultat == True:
+if resultat:
     print("Trobat.")
 else:
     print("No trobat.")
+
+## Demanar a l'usuari un nom per esborrar
+esborrar = input("Introdueix un nom per esborrar: ")
+
+## Comprovar si el nom existeix
+existeix = False
+for nom in range(len(llista)):
+    if llista[nom] == esborrar:
+        existeix = True
+        
+if existeix:
+    llista.remove(esborrar) ## Esborrar el nom
+    for i in range(len(llista)):
+            print(f"{i + 1}. {llista[i]}")## Mostrar la llista actualitzada
+else:    
+    print("El nom no existeix a la llista") ## Si no existeix, notificar-ho a l'usuari
+
+
+
+
+
+
+
+
 
 ##Afegeix una quarta funcionalitat al llistes.py: permetre a l'usuari eliminar un nom de la llista. Si el nom existeix, l'elimina i mostra la llista actualitzada. Si no existeix, ho indica.
 ## Investiga el mètode .remove() de les llistes Python.
