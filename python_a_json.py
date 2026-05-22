@@ -21,4 +21,4 @@ persona03 = {
 agenda = [persona01, persona02, persona03]
 
 with open('agenda.json', 'w') as fitxer:
-    json.dump(agenda, fitxer)
+    json.dump(agenda, fitxer, ensure_ascii=False, indent=4)
