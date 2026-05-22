@@ -39,7 +39,7 @@ mostrar_agenda(agenda)
 cerca = input("Introdueix un nom a buscar: ")
 trobat = False ## Variable per comprovar la cerca.
 
-## Excuta la cerca:
+## Executa la cerca:
 for i in range(len(agenda)):
     if agenda[i]["nom"] == cerca: ## Cerca només dins de la clau "nom"
         trobat = True
