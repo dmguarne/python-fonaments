@@ -48,8 +48,14 @@ def eliminar_contacte(agenda):
             else:
                 print("Gràcies per la teva col·laboració")
 
-with open("agenda.json", "r") as fitxer: ## Obre agenda.json i el llegeix a fitxer.
-    agenda = json.load(fitxer) ## Estableix la variable agenda, que emmagatzema el contingut del fitxer
+try:
+    with open("agenda.json", "r") as fitxer: ## Obre agenda.json i el llegeix a fitxer.
+        agenda = json.load(fitxer) ## Estableix la variable agenda, que emmagatzema el contingut del fitxer
+except FileNotFoundError:
+    agenda = []
+except json.JSONDecodeError:
+    print("El fitxer agenda.json està corromput.")
+    agenda = []
 
 mostrar_agenda(agenda) ## La funció que ja tenia en l'script anterior per pintar l'agenda.
 

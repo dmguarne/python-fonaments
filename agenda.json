@@ -5,53 +5,8 @@
         "ciutat": "Barcelona"
     },
     {
-        "nom": "Maria",
-        "edat": 24,
-        "ciutat": "Girona"
-    },
-    {
         "nom": "Goku",
         "edat": 9,
-        "ciutat": "Horta"
-    },
-    {
-        "nom": "Miki",
-        "edat": 41,
-        "ciutat": "Gràcia"
-    },
-    {
-        "nom": "Perro Sanxe",
-        "edat": 55,
-        "ciutat": "Madrid"
-    },
-    {
-        "nom": "M. Rajoy",
-        "edat": 70,
-        "ciutat": "Pontevedra"
-    },
-    {
-        "nom": "Buenafuente",
-        "edat": 65,
-        "ciutat": "Reus"
-    },
-    {
-        "nom": "Mateo",
-        "edat": 11,
-        "ciutat": "Firenze"
-    },
-    {
-        "nom": "Trump",
-        "edat": 80,
-        "ciutat": "Washington"
-    },
-    {
-        "nom": "Pepita",
-        "edat": 90,
-        "ciutat": "Tarragona"
-    },
-    {
-        "nom": "Papa",
-        "edat": 79,
-        "ciutat": "Roma"
+        "ciutat": "Barcelona"
     }
 ]

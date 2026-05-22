@@ -229,18 +229,75 @@ with open("agenda.json", "w") as fitxer:
 
 ---
 
-## 8. PROJECTE — `agenda_persistent.py`
+## 8. VARIABLES GLOBALS DINS FUNCIONS
 
-Script complet que llegeix, mostra i permet afegir contactes amb persistència real:
+Una funció que usa una variable definida fora d'ella **depèn de context extern**. Això és perillós:
+
+```python
+# ❌ Perillós — agenda no és paràmetre:
+def afegir_contacte():
+    agenda.append(demanar_contacte())  # agenda ve de fora
+
+# ✅ Correcte — agenda entra per paràmetre:
+def afegir_contacte(agenda):
+    agenda.append(demanar_contacte())
+```
+
+**Regla:** tot el que una funció necessita ha d'entrar per paràmetre. Les funcions han de ser autosuficients.
+
+---
+
+## 9. RECURSIÓ I STACK OVERFLOW
+
+**Recursió:** quan una funció es crida a si mateixa.
+
+```python
+def eliminar_contacte():
+    # ...
+    if not trobat:
+        eliminar_contacte()  # ← crida recursiva
+```
+
+**El problema:** cada crida recursiva crea una nova "capa" a la memòria. Si l'usuari introdueix noms incorrectes moltes vegades, la memòria se satura. Això s'anomena **stack overflow**.
+
+**La solució:** substituir la recursió per un `while` quan no hi ha un límit clar de profunditat:
+
+```python
+# ❌ Recursió sense límit:
+def eliminar_contacte():
+    eliminar = input("Introdueix el nom: ")
+    if not trobat:
+        eliminar_contacte()  # risc de stack overflow
+
+# ✅ While amb bandera:
+def eliminar_contacte(agenda):
+    repetir = True
+    trobat = False
+    while repetir and not trobat:
+        eliminar = input("Introdueix el nom: ")
+        # ...cerca...
+        if not trobat:
+            resposta = input("Vols cercar un altre nom? S/N ")
+            if resposta != "S" and resposta != "s":
+                repetir = False
+```
+
+**Quan usar recursió:** quan el problema té una profunditat natural i limitada (arbres, directoris, algoritmes divideix-i-venceràs). Per a bucles simples, sempre `while`.
+
+---
+
+## 10. PROJECTE FINAL — `agenda_persistent.py`
+
+Script complet amb menú interactiu, persistència JSON, afegir i esborrar contactes:
 
 ```python
 import json
 
-## Definició de funcions:
 def mostrar_persona(contacte):
     return f"{contacte["nom"]} | {contacte["edat"]} anys | {contacte["ciutat"]}"
 
 def mostrar_agenda(agenda):
+    print("Agenda:\n")
     for i, contacte in enumerate(agenda, start=1):
         print(f"{i}. {mostrar_persona(contacte)}")
 
@@ -248,37 +305,65 @@ def demanar_contacte():
     nom = input("Introdueix el nom de la persona a afegir: ")
     edat = int(input("Introdueix l'edat: "))
     ciutat = input("Introdueix la ciutat: ")
-    contacte_nou = {
-        "nom": nom,
-        "edat": edat,
-        "ciutat": ciutat,
-    }
-    return contacte_nou
+    return {"nom": nom, "edat": edat, "ciutat": ciutat}
 
-## Llegir l'agenda del fitxer:
+def afegir_contacte(agenda):
+    afegir = input("Vols afegir un nou contacte? (S/N)? ")
+    while afegir == "S" or afegir == "s":
+        agenda.append(demanar_contacte())
+        mostrar_agenda(agenda)
+        afegir = input("Vols afegir un nou contacte? (S/N)? ")
+    else:
+        print("Gràcies per la teva col·laboració")
+
+def eliminar_contacte(agenda):
+    repetir = True
+    trobat = False
+    while repetir and not trobat:
+        eliminar = input("Introdueix el nom: ")
+        for i, contacte in enumerate(agenda, start=1):
+            if contacte["nom"] == eliminar:
+                trobat = True
+                agenda.remove(contacte)
+                print("Contacte eliminat.")
+        if not trobat:
+            repetir = input("Contacte no trobat. Vols cercar un altre nom? S/N ")
+            if repetir != "S" and repetir != "s":
+                repetir = False
+
+## Llegir l'agenda:
 with open("agenda.json", "r") as fitxer:
     agenda = json.load(fitxer)
 
-## Mostrar i permetre afegir contactes:
-print("Agenda:")
 mostrar_agenda(agenda)
 
-afegir = input("Vols afegir un nou contacte? (S/N)? ")
-while afegir == "S" or afegir == "s":
-    agenda.append(demanar_contacte())
-    mostrar_agenda(agenda)
-    afegir = input("Vols afegir un nou contacte? (S/N)? ")
-else:
+## Menú principal:
+accio = "0"
+while accio != "3":
+    accio = input("Escull què vols fer:\n"
+    "1. Afegir contacte\n"
+    "2. Esborrar contacte\n"
+    "3. Res\n")
+    if accio == "1":
+        afegir_contacte(agenda)
+    elif accio == "2":
+        eliminar_contacte(agenda)
+    elif accio != "1" and accio != "2" and accio != "3":
+        print("Input incorrecte")
+
+if accio == "3":
     print("Gràcies per la teva col·laboració")
 
-## Guardar l'agenda actualitzada:
-with open('agenda.json', 'w') as fitxer:
+mostrar_agenda(agenda)
+
+## Guardar:
+with open("agenda.json", "w") as fitxer:
     json.dump(agenda, fitxer, ensure_ascii=False, indent=4)
 ```
 
 ---
 
-## 9. ERRORS COMUNS
+## 11. ERRORS COMUNS
 
 | Error | Causa | Solució |
 |-------|-------|---------|
@@ -287,10 +372,14 @@ with open('agenda.json', 'w') as fitxer:
 | Edats com a string al JSON | `input()` sempre retorna `str` | `int(input(...))` per capturar enters |
 | Accents com `\u00f3` al JSON | `ensure_ascii=True` per defecte | Afegir `ensure_ascii=False` a `json.dump` |
 | Tres blocs `with open` | Confondre fitxer amb memòria | Dos blocs: un `"r"` i un `"w"`. Lògica entremig |
+| Variable global dins funció | Funció depèn de context extern | Passar-la com a paràmetre |
+| Recursió sense límit | Stack overflow amb moltes crides | Substituir per `while` amb bandera |
+| `accio = int` o `accio = str` | Assigna la funció, no un valor | Inicialitzar amb un valor: `accio = "0"` |
+| `if x != "A" or x != "B"` | Sempre `True` — cap valor pot ser A i B alhora | Usar `and`: `if x != "A" and x != "B"` |
 
 ---
 
-## 10. CONCEPTES CLAU DE LA SESSIÓ
+## 12. CONCEPTES CLAU DE LA SESSIÓ
 
 **Persistència:** capacitat de conservar dades entre execucions d'un programa. Sense fitxers, tot es perd en tancar.
 
@@ -302,9 +391,13 @@ with open('agenda.json', 'w') as fitxer:
 
 **Referència vs còpia:** quan iteres una llista de diccionaris i modifiques un element, estàs modificant l'original — no una còpia.
 
+**Recursió vs while:** la recursió és poderosa però perillosa sense límit. Per a bucles simples, `while` amb bandera és sempre més segur.
+
+**Stack overflow:** saturació de la pila de crides per recursió excessiva. El nom d'una web molt famosa no és casualitat.
+
 ---
 
-## 11. TAULA DE SEGUIMENT
+## 13. TAULA DE SEGUIMENT
 
 | Skill | Nivell | Evidència | Proper pas |
 |-------|--------|-----------|------------|
@@ -313,7 +406,7 @@ with open('agenda.json', 'w') as fitxer:
 | Python — Condicions | 5/10 | Aplicades autònomament i combinades | Combinació complexa |
 | Python — Bucles | 7/10 | `enumerate` amb `start=1`, `while` afegit autònomament | Llistes per comprensió |
 | Python — Llistes | 7/10 | Llistes de diccionaris, accés encadenat, refactorització | Llistes per comprensió |
-| Python — Funcions | 6/10 | `return`, Single Responsibility, codi autodocumentat | Funcions amb valors per defecte |
+| Python — Funcions | 7/10 | `return`, Single Responsibility, paràmetres vs globals | Funcions amb valors per defecte |
 | Python — Diccionaris | 5/10 | Accés encadenat, llistes de diccionaris, cerca per clau | Diccionaris niats |
 | Python — Fitxers | 4/10 | `with open`, modes `r/w`, model mental memòria/disc | Gestió d'errors amb fitxers |
 | Python — JSON | 4/10 | `json.load`, `json.dump`, `ensure_ascii`, `indent` | JSON amb APIs |
@@ -325,16 +418,14 @@ with open('agenda.json', 'w') as fitxer:
 
 ---
 
-## DEURES PENDENTS
+## DEURES PENDENTS (completats)
 
-Afegeix a `agenda_persistent.py` la funcionalitat d'**esborrar** un contacte per nom:
+✅ Afegir funcionalitat d'esborrar contacte per nom
+✅ Menú interactiu amb opcions afegir / esborrar / sortir
+✅ Funcions autosuficients amb `agenda` com a paràmetre
+✅ Recursió substituïda per `while` amb bandera
 
-1. Demanar a l'usuari el nom a esborrar
-2. Cercar-lo a l'agenda
-3. Si existeix → esborrar-lo i guardar el JSON actualitzat
-4. Si no existeix → notificar a l'usuari
-
-**Pista:** ja saps esborrar elements d'una llista amb `.remove()`. Però ara els elements són diccionaris, no strings. Com compares per saber quin esborrar?
+**Propera sessió:** `try/except` per gestionar errors inesperats (què passa si `agenda.json` no existeix?) i push a GitHub.
 
 ---
 

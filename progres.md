@@ -18,7 +18,7 @@
 | Python — Condicions | 5/10 | Aplicades autònomament i combinades | Combinació complexa |
 | Python — Bucles | 7/10 | `enumerate` amb `start=1`, `while` afegit autònomament | Llistes per comprensió |
 | Python — Llistes | 7/10 | Llistes de diccionaris, accés encadenat, refactorització | Llistes per comprensió |
-| Python — Funcions | 6/10 | `return`, Single Responsibility, codi autodocumentat | Funcions amb valors per defecte |
+| Python — Funcions | 7/10 | `return`, Single Responsibility, paràmetres vs globals, recursió detectada | Funcions amb valors per defecte |
 | Python — Diccionaris | 5/10 | Accés encadenat, llistes de diccionaris, cerca per clau | Diccionaris niats |
 | Python — Fitxers | 4/10 | `with open`, modes `r/w`, model mental memòria/disc | Gestió d'errors amb fitxers |
 | Python — JSON | 4/10 | `json.load`, `json.dump`, `ensure_ascii`, `indent` | JSON amb APIs |
@@ -197,33 +197,36 @@ Sessió de maduresa. El salt no és de sintaxi sinó conceptual: ha après a pen
 - Tipus de dades al JSON: `input()` retorna `str`, cal `int()` per guardar enters
 - Script de correcció de tipus en un JSON existent
 - Referència vs còpia: modificar un diccionari dins un bucle modifica l'original
+- Variables globals dins funcions: per què son perilloses, solució amb paràmetres
+- Recursió i stack overflow: quan usar-la i quan substituir-la per `while`
+- Bug lògic `or` vs `and` en condicions de negació múltiple
+- Inicialització correcta de variables de control (`accio = "0"` vs `accio = int`)
 
 **Projectes construïts:**
-- `agenda_persistent.py` — lectura, visualització i afegit de contactes amb persistència real, bucle `while` per afegir múltiples contactes, guardat final al JSON
-- Script de correcció de tipus (`refactoritzar_agenda.py`) — converteix edats de string a int al JSON
+- `agenda_persistent.py` — programa complet amb menú interactiu, afegir i esborrar contactes, persistència JSON, funcions autosuficients
+- `refactoritzar_agenda.py` — script de correcció de tipus al JSON existent
 
 **Errors principals:**
-- Malentès inicial: creure que es podia modificar el fitxer directament sense passar per memòria (resolt amb explicació del model mental)
-- Tres blocs `with open` en lloc de dos (detectat i refactoritzat)
+- Malentès inicial sobre modificar fitxers directament (resolt amb model mental)
+- Tres blocs `with open` en lloc de dos (refactoritzat)
+- Variables globals dins funcions (corregit afegint paràmetres)
+- Recursió sense límit a `eliminar_contacte` (substituïda per `while` amb bandera)
+- `if repetir != "S" or repetir != "s"` — condició sempre `True` (corregit a `and`)
+- `accio = int` — assignació de funció en lloc de valor (corregit a `accio = "0"`)
 
 **Transferència autònoma destacada:**
-Ha afegit el bucle `while` per permetre afegir múltiples contactes sense que el tutor ho demanés. Ha argumentat el trade-off DRY vs Single Responsibility amb criteri tècnic propi. Ha construït el script de correcció de tipus completament sol. ⭐⭐⭐
+Ha afegit menú interactiu complet sense que el tutor ho demanés. Ha usat recursió per primera vegada de forma espontània. Ha detectat i corregit el bug `or` vs `and` autònomament. Ha construït el script de correcció de tipus completament sol. ⭐⭐⭐
 
 **Observació del tutor:**
-Sessió molt productiva. El model mental fitxer/memòria és el concepte més abstracte treballat fins ara i l'ha assimilat bé un cop explicat amb l'analogia correcta. La capacitat d'afegir funcionalitats no demanades (el `while`) confirma que el pensament algorítmic està consolidant-se. Preparat per a gestió d'errors (`try/except`) i push a GitHub.
+Sessió excepcional. Ha entregat els deures i ha construït un programa molt més ambiciós del que se li demanava. La recursió espontània demostra que el pensament algorítmic està madur — sap que existeix el concepte i l'ha aplicat intuïtivament, tot i que cal aprendre quan NO usar-la. Preparat per a `try/except` i push a GitHub.
 
 ---
 
 ## DEURES PENDENTS
 
-Afegeix a `agenda_persistent.py` la funcionalitat d'**esborrar** un contacte per nom:
+**Propera sessió:** `try/except` per gestionar errors inesperats.
 
-1. Demanar a l'usuari el nom a esborrar
-2. Cercar-lo a l'agenda
-3. Si existeix → esborrar-lo i guardar el JSON actualitzat
-4. Si no existeix → notificar a l'usuari
-
-**Pista:** ja saps esborrar elements d'una llista amb `.remove()`. Però ara els elements són diccionaris, no strings. Com compares per saber quin esborrar?
+Investiga: què passa si executes `agenda_persistent.py` quan `agenda.json` **no existeix**? Prova-ho i anota l'error que dona.
 
 ---
 
