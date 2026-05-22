@@ -10,11 +10,6 @@
         "ciutat": "Girona"
     },
     {
-        "nom": "Antoni",
-        "edat": 55,
-        "ciutat": "Mataró"
-    },
-    {
         "nom": "Goku",
         "edat": 9,
         "ciutat": "Horta"
@@ -23,21 +18,6 @@
         "nom": "Miki",
         "edat": 41,
         "ciutat": "Gràcia"
-    },
-    {
-        "nom": "Trump",
-        "edat": 80,
-        "ciutat": "Washington"
-    },
-    {
-        "nom": "Xi Jinping",
-        "edat": 69,
-        "ciutat": "Beijing"
-    },
-    {
-        "nom": "Manuel",
-        "edat": 15,
-        "ciutat": "Lleida"
     },
     {
         "nom": "Perro Sanxe",
@@ -53,5 +33,25 @@
         "nom": "Buenafuente",
         "edat": 65,
         "ciutat": "Reus"
+    },
+    {
+        "nom": "Mateo",
+        "edat": 11,
+        "ciutat": "Firenze"
+    },
+    {
+        "nom": "Trump",
+        "edat": 80,
+        "ciutat": "Washington"
+    },
+    {
+        "nom": "Pepita",
+        "edat": 90,
+        "ciutat": "Tarragona"
+    },
+    {
+        "nom": "Papa",
+        "edat": 79,
+        "ciutat": "Roma"
     }
 ]

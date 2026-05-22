@@ -5,7 +5,7 @@
 - **Nivell assignat:** PRINCIPIANT**→INTERMEDI** (transició en curs)
 - **Objectiu:** Curiositat i feina
 - **Hores setmanals:** 10
-- **Risc detectat:** Tutorial hell — tendència a consumir sense construir *(risc reduït: 5 sessions consecutives construint codi real)*
+- **Risc detectat:** Tutorial hell — tendència a consumir sense construir *(risc eliminat: 6 sessions consecutives construint codi real)*
 
 ---
 
@@ -14,12 +14,14 @@
 | Skill | Nivell | Evidència | Proper pas |
 |-------|--------|-----------|------------|
 | Python — Variables | 5/10 | Aplicades amb autonomia en múltiples scripts | — |
-| Python — Tipus | 5/10 | Casting fluid i sense errors | — |
+| Python — Tipus | 6/10 | Casting fluid, detecció proactiva de tipus a JSON | — |
 | Python — Condicions | 5/10 | Aplicades autònomament i combinades | Combinació complexa |
-| Python — Bucles | 6/10 | Acumuladors, bugs resolts autònomament | `enumerate` |
+| Python — Bucles | 7/10 | `enumerate` amb `start=1`, `while` afegit autònomament | Llistes per comprensió |
 | Python — Llistes | 7/10 | Llistes de diccionaris, accés encadenat, refactorització | Llistes per comprensió |
-| Python — Funcions | 6/10 | `return`, Single Responsibility, codi autodocumentat, variables globals detectades | Funcions amb valors per defecte |
+| Python — Funcions | 6/10 | `return`, Single Responsibility, codi autodocumentat | Funcions amb valors per defecte |
 | Python — Diccionaris | 5/10 | Accés encadenat, llistes de diccionaris, cerca per clau | Diccionaris niats |
+| Python — Fitxers | 4/10 | `with open`, modes `r/w`, model mental memòria/disc | Gestió d'errors amb fitxers |
+| Python — JSON | 4/10 | `json.load`, `json.dump`, `ensure_ascii`, `indent` | JSON amb APIs |
 | Terminal | 5/10 | Navegació autònoma | Permisos i pipes |
 | Git | 5/10 | Commits regulars amb missatges descriptius, hàbit consolidat | Push a GitHub |
 | Web | 2/10 | HTML bàsic | DevTools |
@@ -175,11 +177,53 @@ Sessió de maduresa. El salt no és de sintaxi sinó conceptual: ha après a pen
 
 ---
 
+## SESSIÓ 6 — Resum
+
+**Data:** 22/05/2026
+
+**Contingut treballat:**
+- Repàs i aplicació definitiva de `enumerate()` amb `start=1`
+- Debat DRY vs Single Responsibility — resolució argumentada autònomament
+- Recuperació de `mostrar_persona` per centralitzar el format (DRY aplicat)
+- El problema de la persistència: per què les dades desapareixen en tancar el programa
+- Fitxers: modes `"r"`, `"w"`, `"a"` i diferències pràctiques
+- Sintaxi `with open ... as fitxer` — per què és la forma correcta
+- Model mental fonamental: fitxer vs memòria (llegir → memòria → modificar → guardar)
+- Serialització: per què no es pot escriure una llista directament a un fitxer
+- JSON: estructura, similitud amb diccionaris Python, format estàndard d'APIs
+- `import json` — primer ús d'un mòdul de la biblioteca estàndard
+- `json.dump()` amb `ensure_ascii=False` i `indent=4`
+- `json.load()` per recuperar estructures Python des d'un fitxer
+- Tipus de dades al JSON: `input()` retorna `str`, cal `int()` per guardar enters
+- Script de correcció de tipus en un JSON existent
+- Referència vs còpia: modificar un diccionari dins un bucle modifica l'original
+
+**Projectes construïts:**
+- `agenda_persistent.py` — lectura, visualització i afegit de contactes amb persistència real, bucle `while` per afegir múltiples contactes, guardat final al JSON
+- Script de correcció de tipus (`refactoritzar_agenda.py`) — converteix edats de string a int al JSON
+
+**Errors principals:**
+- Malentès inicial: creure que es podia modificar el fitxer directament sense passar per memòria (resolt amb explicació del model mental)
+- Tres blocs `with open` en lloc de dos (detectat i refactoritzat)
+
+**Transferència autònoma destacada:**
+Ha afegit el bucle `while` per permetre afegir múltiples contactes sense que el tutor ho demanés. Ha argumentat el trade-off DRY vs Single Responsibility amb criteri tècnic propi. Ha construït el script de correcció de tipus completament sol. ⭐⭐⭐
+
+**Observació del tutor:**
+Sessió molt productiva. El model mental fitxer/memòria és el concepte més abstracte treballat fins ara i l'ha assimilat bé un cop explicat amb l'analogia correcta. La capacitat d'afegir funcionalitats no demanades (el `while`) confirma que el pensament algorítmic està consolidant-se. Preparat per a gestió d'errors (`try/except`) i push a GitHub.
+
+---
+
 ## DEURES PENDENTS
 
-Refactoritza `agenda.py` substituint `for i in range(len(agenda))` per `enumerate()` a les dues funcions i al bucle de cerca.
+Afegeix a `agenda_persistent.py` la funcionalitat d'**esborrar** un contacte per nom:
 
-Investiga la sintaxi de `enumerate()` i aplica-la. Després: `git commit -m "missatge descriptiu"`.
+1. Demanar a l'usuari el nom a esborrar
+2. Cercar-lo a l'agenda
+3. Si existeix → esborrar-lo i guardar el JSON actualitzat
+4. Si no existeix → notificar a l'usuari
+
+**Pista:** ja saps esborrar elements d'una llista amb `.remove()`. Però ara els elements són diccionaris, no strings. Com compares per saber quin esborrar?
 
 ---
 
@@ -191,8 +235,9 @@ Investiga la sintaxi de `enumerate()` i aplica-la. Després: `git commit -m "mis
 | 1-2 | Variables, tipus, condicions | ✅ Completat |
 | 2-3 | Bucles `for` i `while`, `range`, f-strings avançades | ✅ Completat |
 | 3-4 | Llistes, diccionaris, funcions | ✅ Completat |
-| 4-5 | Terminal Linux, Git (push a GitHub) | 🔄 En curs |
-| 6-7 | Fitxers, mòduls, errors, debugging | ⏳ Pendent |
+| 4-5 | Fitxers, JSON, persistència | ✅ Completat |
+| 5-6 | Terminal Linux, Git (push a GitHub) | 🔄 En curs |
+| 6-7 | Gestió d'errors (`try/except`), mòduls, debugging | ⏳ Pendent |
 | 7-8 | Scraping, automatització bàsica | ⏳ Pendent |
 
 ### FASE 2 — Web i APIs *(pendent)*
