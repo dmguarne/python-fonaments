@@ -8,5 +8,25 @@
         "nom": "Goku",
         "edat": 9,
         "ciutat": "Barcelona"
+    },
+    {
+        "nom": "Maria",
+        "edat": 50,
+        "ciutat": "Girona"
+    },
+    {
+        "nom": "Antoni",
+        "edat": 70,
+        "ciutat": "Reus"
+    },
+    {
+        "nom": "Xi Jinping",
+        "edat": 71,
+        "ciutat": "Beijing"
+    },
+    {
+        "nom": "Buenafuente",
+        "edat": 65,
+        "ciutat": "Reus"
     }
 ]

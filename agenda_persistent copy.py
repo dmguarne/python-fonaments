@@ -12,9 +12,19 @@ def mostrar_agenda(agenda):
 
 ## Funció per demanar les dades d'un nou contacte i crear el diccionari:
 def demanar_contacte():
-    nom = input("Introdueix el nom de la persona a afegir: ")
-    edat = int(input("Introdueix l'edat: "))
-    ciutat = input("Introdueix la ciutat: ")
+    nom = ""
+    ciutat = ""
+    while not nom:
+        nom = input("Introdueix el nom de la persona a afegir: ")
+    valid = False
+    while not valid:
+        try:
+            edat = int(input("Introdueix l'edat: "))
+            valid = True
+        except ValueError:
+            print("L'edat ha de ser un número.")
+    while not ciutat:
+        ciutat = input("Introdueix la ciutat: ")
     contacte_nou = {
         "nom": nom,
         "edat": edat,
@@ -76,5 +86,10 @@ if accio == "3":
 
 mostrar_agenda(agenda)
 
-with open('agenda.json', 'w') as fitxer: ## Obre agenda.json en mode escriptura per actualitzar-lo.
-    json.dump(agenda, fitxer, ensure_ascii=False, indent=4) ## Bolca el contingut actualitzat d'agenda al json sobreescrivint el contingut previ.
+try:
+    with open('agenda.json', 'w') as fitxer: ## Obre agenda.json en mode escriptura per actualitzar-lo.
+        json.dump(agenda, fitxer, ensure_ascii=False, indent=4) ## Bolca el contingut actualitzat d'agenda al json sobreescrivint el contingut previ.
+except PermissionError:
+    print("No tens permisos per desar el fitxer.")
+except OSError:
+    print("Error del sistema.")
