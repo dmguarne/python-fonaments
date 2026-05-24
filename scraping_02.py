@@ -1,7 +1,10 @@
+import os
 import requests
 
+api_key = os.environ.get("NASA_API_KEY")
+
 try:
-    response = requests.get("https://api.nasa.gov/planetary/apod?api_key=lGLvZyxLU6WX1fCDRnSnF5zUge9VxoehiVHTA2kB") ## Fa la petició al servidor i l'emmagatzema en text a la variable response.
+    response = requests.get(f"https://api.nasa.gov/planetary/apod?api_key={api_key}") ## Fa la petició al servidor i l'emmagatzema en text a la variable response.
     if response.status_code == 200: ## Si la resposta del servidor és positiva, executa el codi.
         dades = response.json() ## Converteix el text de la resposta del servidor a Python.
         print(f"La imatge del dia és {dades['media_type']}, el títol és {dades['title']} i l'enllaç és {dades["url"]}") ## Imprimeix les claus tipus, títol i url.
