@@ -5,7 +5,7 @@
 - **Nivell assignat:** PRINCIPIANT**→INTERMEDI** (transició en curs)
 - **Objectiu:** Curiositat i feina
 - **Hores setmanals:** 10
-- **Risc detectat:** Tutorial hell — tendència a consumir sense construir *(risc eliminat: 6 sessions consecutives construint codi real)*
+- **Risc detectat:** Tutorial hell — tendència a consumir sense construir *(risc eliminat: 7 sessions consecutives construint codi real)*
 
 ---
 
@@ -20,10 +20,11 @@
 | Python — Llistes | 7/10 | Llistes de diccionaris, accés encadenat, refactorització | Llistes per comprensió |
 | Python — Funcions | 7/10 | `return`, Single Responsibility, paràmetres vs globals, recursió detectada | Funcions amb valors per defecte |
 | Python — Diccionaris | 5/10 | Accés encadenat, llistes de diccionaris, cerca per clau | Diccionaris niats |
-| Python — Fitxers | 4/10 | `with open`, modes `r/w`, model mental memòria/disc | Gestió d'errors amb fitxers |
+| Python — Fitxers | 5/10 | `try/except` per lectura i escriptura, gestió robusta | Modes avançats |
 | Python — JSON | 4/10 | `json.load`, `json.dump`, `ensure_ascii`, `indent` | JSON amb APIs |
+| Python — Errors | 5/10 | `try/except` específic, `while` + `try/except` combinats | Errors personalitzats |
 | Terminal | 5/10 | Navegació autònoma | Permisos i pipes |
-| Git | 5/10 | Commits regulars amb missatges descriptius, hàbit consolidat | Push a GitHub |
+| Git | 6/10 | Push a GitHub, Personal Access Token, flux complet | Branques |
 | Web | 2/10 | HTML bàsic | DevTools |
 | Seguretat | 1/10 | Nocions | Laboratori futur |
 | OSINT | 3/10 | Google ops | Automatitzar |
@@ -222,11 +223,46 @@ Sessió excepcional. Ha entregat els deures i ha construït un programa molt mé
 
 ---
 
+## SESSIÓ 7 — Resum
+
+**Data:** 22/05/2026
+
+**Contingut treballat:**
+- Deures verificats: `FileNotFoundError` identificat correctament sense ajuda
+- `try/except`: sintaxi bàsica, funcionament, captura d'errors específics
+- Múltiples `except` en un sol bloc `try`
+- Regla d'or: mai capturar `Exception` genèrica
+- Errors comuns i els seus noms: `FileNotFoundError`, `json.JSONDecodeError`, `ValueError`, `PermissionError`, `OSError`
+- `try/except` per lectura de fitxers JSON
+- `try/except` per escriptura de fitxers JSON
+- Patró `while` + `try/except` per validació robusta d'entrades
+- Validació de strings buits amb `while not nom` (forma pythònica)
+- Funció `demanar_contacte()` completament robusta
+- Git remot: `git remote add origin`, `git branch -M main`, `git push -u origin main`
+- Personal Access Token de GitHub
+- Flux de treball diari amb GitHub: `add` → `commit` → `push`
+- Markdown: sintaxi bàsica per a documentació
+
+**Projecte construït:**
+- `agenda_persistent.py` versió final robusta — gestió completa d'errors en lectura, escriptura i entrades d'usuari
+- `apunts_sessio7.md` — documentació de la sessió en Markdown
+
+**Errors principals:**
+- Primer `try/except` sense `while` — només cobria el primer intent (detectat i corregit autònomament)
+- `while nom == ""` en lloc de `while not nom` (corregit quan se li va suggerir)
+
+**Transferència autònoma destacada:**
+Ha detectat i corregit el bug del `try/except` sense `while` ell sol, abans que el tutor li ho indiqués. Ha fet el push a GitHub de forma autònoma seguint les instruccions. ⭐⭐
+
+**Observació del tutor:**
+Sessió sòlida de consolidació. El patró `while` + `try/except` és un dels més importants de Python i l'ha interioritzat bé. El codi de la `demanar_contacte()` final és genuïnament professional. Primer codi públic a internet: fita important. Preparat per a scraping amb `requests`.
+
+---
+
 ## DEURES PENDENTS
 
-**Propera sessió:** `try/except` per gestionar errors inesperats.
-
-Investiga: què passa si executes `agenda_persistent.py` quan `agenda.json` **no existeix**? Prova-ho i anota l'error que dona.
+- **`README.md`:** crear fitxer de documentació al repositori amb sintaxi Markdown bàsica i fer `git push`
+- **Investigar `requests`:** llegir què és la llibreria `requests` de Python i per a què serveix (sense instal·lar ni escriure codi — només entendre la idea)
 
 ---
 
@@ -239,8 +275,8 @@ Investiga: què passa si executes `agenda_persistent.py` quan `agenda.json` **no
 | 2-3 | Bucles `for` i `while`, `range`, f-strings avançades | ✅ Completat |
 | 3-4 | Llistes, diccionaris, funcions | ✅ Completat |
 | 4-5 | Fitxers, JSON, persistència | ✅ Completat |
-| 5-6 | Terminal Linux, Git (push a GitHub) | 🔄 En curs |
-| 6-7 | Gestió d'errors (`try/except`), mòduls, debugging | ⏳ Pendent |
+| 5-6 | Terminal Linux, Git (push a GitHub) | ✅ Completat |
+| 6-7 | Gestió d'errors (`try/except`), validació robusta | ✅ Completat |
 | 7-8 | Scraping, automatització bàsica | ⏳ Pendent |
 
 ### FASE 2 — Web i APIs *(pendent)*
