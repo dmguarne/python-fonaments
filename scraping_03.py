@@ -20,7 +20,7 @@ try:
         print(f"Pàgina {pagina}/50")
         soup = BeautifulSoup(response.text, "html.parser")
         elements = soup.find_all("article", class_="product_pod") # Retorna una llista amb tots els objectes "article".
-        for i, article in enumerate(elements, start=ordre): # Recorre cada element de la llista
+        for i, article in enumerate(elements): # Recorre cada element de la llista
             llibre = article.find("a", title=True) # Troba l'etiqueta "a" que conté el títol i el desa a "llibre"
             titol = llibre["title"] # Desa a "titol" el contingut de l'atribut "title" de l'etiqueta "a"
             preu = article.find("p", class_="price_color") # Troba l'etiqueta "p" que conté el preu
