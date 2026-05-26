@@ -5,7 +5,7 @@
 - **Nivell assignat:** PRINCIPIANT**→INTERMEDI** (transició en curs)
 - **Objectiu:** Curiositat i feina
 - **Hores setmanals:** 10
-- **Risc detectat:** Tutorial hell — tendència a consumir sense construir *(risc eliminat: 7 sessions consecutives construint codi real)*
+- **Risc detectat:** Tutorial hell — tendència a consumir sense construir *(risc eliminat: 8 sessions consecutives construint codi real)*
 
 ---
 
@@ -14,19 +14,22 @@
 | Skill | Nivell | Evidència | Proper pas |
 |-------|--------|-----------|------------|
 | Python — Variables | 5/10 | Aplicades amb autonomia en múltiples scripts | — |
-| Python — Tipus | 6/10 | Casting fluid, detecció proactiva de tipus a JSON | — |
-| Python — Condicions | 5/10 | Aplicades autònomament i combinades | Combinació complexa |
-| Python — Bucles | 7/10 | `enumerate` amb `start=1`, `while` afegit autònomament | Llistes per comprensió |
-| Python — Llistes | 7/10 | Llistes de diccionaris, accés encadenat, refactorització | Llistes per comprensió |
-| Python — Funcions | 7/10 | `return`, Single Responsibility, paràmetres vs globals, recursió detectada | Funcions amb valors per defecte |
-| Python — Diccionaris | 5/10 | Accés encadenat, llistes de diccionaris, cerca per clau | Diccionaris niats |
-| Python — Fitxers | 5/10 | `try/except` per lectura i escriptura, gestió robusta | Modes avançats |
-| Python — JSON | 4/10 | `json.load`, `json.dump`, `ensure_ascii`, `indent` | JSON amb APIs |
-| Python — Errors | 5/10 | `try/except` específic, `while` + `try/except` combinats | Errors personalitzats |
-| Terminal | 5/10 | Navegació autònoma | Permisos i pipes |
-| Git | 6/10 | Push a GitHub, Personal Access Token, flux complet | Branques |
-| Web | 2/10 | HTML bàsic | DevTools |
-| Seguretat | 1/10 | Nocions | Laboratori futur |
+| Python — Tipus | 6/10 | Casting fluid, detecció proactiva de tipus | — |
+| Python — Condicions | 6/10 | Aplicades amb condicionals per `media_type` | Combinació complexa |
+| Python — Bucles | 7/10 | `enumerate` amb `start=1` aplicat autònomament | Llistes per comprensió |
+| Python — Llistes | 7/10 | Llistes de diccionaris, accés encadenat | Llistes per comprensió |
+| Python — Funcions | 7/10 | `return`, Single Responsibility, paràmetres vs globals | Funcions amb valors per defecte |
+| Python — Diccionaris | 5/10 | Accés encadenat, llistes de diccionaris | Diccionaris niats |
+| Python — Fitxers | 5/10 | `try/except` per lectura i escriptura | Modes avançats |
+| Python — JSON | 5/10 | `json.load`, `json.dump`, APIs reals | JSON amb múltiples APIs |
+| Python — Errors | 6/10 | `try/except` amb xarxa, estructura correcta dins `try` | Errors personalitzats |
+| Python — Strings | 5/10 | Slicing deduït autònomament: `text[2:]` | Mètodes de string |
+| requests | 4/10 | GET, `status_code`, `.json()`, variables d'entorn | POST, headers |
+| BeautifulSoup | 4/10 | `find`, `find_all`, atributs, cerca dins element | Paginació, scraping avançat |
+| Seguretat | 3/10 | Variables d'entorn, consciència de claus exposades, historial Git | `.env` files, secrets management |
+| Terminal | 5/10 | Navegació autònoma, `.bashrc`, `export` | Permisos i pipes |
+| Git | 6/10 | Push a GitHub, flux complet, commits descriptius | Branques |
+| Web | 2/10 | HTML bàsic, inspecció d'elements amb DevTools | DevTools avançat |
 | OSINT | 3/10 | Google ops | Automatitzar |
 
 ---
@@ -144,7 +147,7 @@ Sessió molt sòlida. Millora notable en autonomia de depuració. El raonament s
 Ha deduït per si sol per què existeixen les funcions a partir del problema del codi duplicat. Ha resolt el bug de sobreescriptura aplicant el patró après a la sessió anterior sense que el tutor li ho recordés. ⭐⭐⭐
 
 **Observació del tutor:**
-Sessió excel·lent. Autonomia creixent i molt notable. El salt qualitatiu més important fins ara: no només aplica el que se li explica, sinó que **generalitza patrons** i els reutilitza en contextos nous. Preparat per al primer exercici que combina llistes + diccionaris + funcions.
+Sessió excel·lent. Autonomia creixent i molt notable. El salt qualitatiu més important fins ara: no només aplica el que se li explica, sinó que generalitza patrons i els reutilitza en contextos nous. Preparat per al primer exercici que combina llistes + diccionaris + funcions.
 
 ---
 
@@ -219,7 +222,7 @@ Sessió de maduresa. El salt no és de sintaxi sinó conceptual: ha après a pen
 Ha afegit menú interactiu complet sense que el tutor ho demanés. Ha usat recursió per primera vegada de forma espontània. Ha detectat i corregit el bug `or` vs `and` autònomament. Ha construït el script de correcció de tipus completament sol. ⭐⭐⭐
 
 **Observació del tutor:**
-Sessió excepcional. Ha entregat els deures i ha construït un programa molt més ambiciós del que se li demanava. La recursió espontània demostra que el pensament algorítmic està madur — sap que existeix el concepte i l'ha aplicat intuïtivament, tot i que cal aprendre quan NO usar-la. Preparat per a `try/except` i push a GitHub.
+Sessió excepcional. Ha entregat els deures i ha construït un programa molt més ambiciós del que se li demanava. La recursió espontània demostra que el pensament algorítmic està madur. Preparat per a `try/except` i push a GitHub.
 
 ---
 
@@ -259,10 +262,55 @@ Sessió sòlida de consolidació. El patró `while` + `try/except` és un dels m
 
 ---
 
+## SESSIÓ 8 — Resum
+
+**Data:** 26/05/2026
+
+**Contingut treballat:**
+- HTTP: protocol client/servidor, verbs GET i POST, codis d'estat (200, 404, 403, 500)
+- Objectes: atributs (sense parèntesis) vs mètodes (amb parèntesis)
+- `requests`: instal·lació, `requests.get()`, objecte `response`
+- `response.status_code`, `response.text`, `response.json()`
+- APIs públiques: peticions reals a ISS (Open Notify) i NASA APOD
+- Estructura correcta de `try/except` amb xarxa: `if status_code` dins el `try`
+- Seguretat: mai hardcodejar API keys al codi
+- Variables d'entorn: `export` al `.bashrc`, `os.environ.get()`
+- Historial de Git: per què un commit nou no esborra dades sensibles anteriors
+- `git config --global credential.helper store` per recordar el token
+- BeautifulSoup: instal·lació, `html.parser`, relació amb `requests`
+- `soup.title` vs `soup.title.text` — objecte complet vs text pur
+- `.find()` i `.find_all()` amb filtres: `class_=`, `title=True`
+- Cercar dins un element concret amb `.find()` (no a tota la pàgina)
+- Slicing de strings: `text[2:]`, `text[:3]`, `text[1:4]`
+- Inspecció d'HTML amb DevTools del navegador per identificar elements
+
+**Projectes construïts:**
+- `scraping_01.py` — petició GET a httpbin.org, exploració de `response`
+- `scraping_02.py` — API NASA APOD amb `os.environ.get()`, condicional per `media_type`, data
+- `scraping_03.py` — scraping de books.toscrape.com: títols i preus de 20 llibres
+
+**Errors principals:**
+- API key de la NASA hardcodejada a GitHub (corregida amb variables d'entorn)
+- `response = False` com a solució al problema de variable no definida al `except` (resolt movent el `if` dins el `try`)
+- `missatge:media` en lloc de `missatge_media` — dos punts en lloc d'igual (detectat per revisió de codi)
+- `find_all('a')` sense filtre retornava tots els `<a>` de la pàgina (resolt amb `title=True`)
+- Element d'entrada massa específic (`<a>`) que no contenia el preu (resolt pujant al `<article>` pare)
+
+**Transferència autònoma destacada:**
+Ha explorat l'estructura de la resposta de l'API abans d'escriure el codi. Ha aplicat slicing `[2:]` per resoldre un problema d'encoding sense que el tutor li ho expliqués. Ha inspeccionat l'HTML autònomament per identificar l'element pare correcte. ⭐⭐⭐
+
+**Observació del tutor:**
+Sessió de maduresa tècnica real. Ha passat de scripts locals a parlar amb serveis d'internet i extreure dades de webs reals. La lliçó de seguretat de les API keys és de les que no s'obliden. El slicing deduït autònomament és un indicador clar que el pensament algorítmic està consolidat. Preparat per a entorns virtuals i scraping avançat amb paginació.
+
+---
+
 ## DEURES PENDENTS
 
-- **`README.md`:** crear fitxer de documentació al repositori amb sintaxi Markdown bàsica i fer `git push`
-- **Investigar `requests`:** llegir què és la llibreria `requests` de Python i per a què serveix (sense instal·lar ni escriure codi — només entendre la idea)
+- Ampliar `scraping_03.py`:
+  - Afegir la **puntuació** de cada llibre (`"One"`, `"Two"`... a l'HTML)
+  - Guardar resultats a `llibres.json` amb `json.dump` — cada llibre com a diccionari amb `titol`, `preu` i `puntuacio`
+  - `git commit` i `git push`
+- **Investigar entorns virtuals** (`venv`): per a què serveixen i com es creen (sense implementar encara)
 
 ---
 
@@ -277,7 +325,8 @@ Sessió sòlida de consolidació. El patró `while` + `try/except` és un dels m
 | 4-5 | Fitxers, JSON, persistència | ✅ Completat |
 | 5-6 | Terminal Linux, Git (push a GitHub) | ✅ Completat |
 | 6-7 | Gestió d'errors (`try/except`), validació robusta | ✅ Completat |
-| 7-8 | Scraping, automatització bàsica | ⏳ Pendent |
+| 7-8 | Scraping, `requests`, BeautifulSoup, APIs reals | ✅ Completat |
+| 8-9 | Entorns virtuals, scraping avançat, paginació | ⏳ Pendent |
 
 ### FASE 2 — Web i APIs *(pendent)*
 ### FASE 3 — Sistemes i Linux *(pendent)*

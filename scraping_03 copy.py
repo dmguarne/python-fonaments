@@ -23,7 +23,7 @@ for i, article in enumerate(elements, start=1): # Recorre cada element de la lli
     titol = llibre["title"] # Desa a "titol" el contingut de l'atribut "title" de l'etiqueta "a"
     preu = article.find("p", class_="price_color") # Troba l'etiqueta "p" que conté el preu
     preu_final = preu.text # Agafa el text que hi ha dins l'etiqueta "p"
-    puntuacio = "" # Afegir la puntuació de cada llibre
+    puntuacio = ""
     if article.find("p", class_="star-rating One"):
         puntuacio = "1/5"
     elif article.find("p", class_="star-rating Two"):
@@ -33,21 +33,24 @@ for i, article in enumerate(elements, start=1): # Recorre cada element de la lli
     elif article.find("p", class_="star-rating Four"):
         puntuacio = "4/5"
     elif article.find("p", class_="star-rating Five"):
-        puntuacio = "5/5"
-    else:
-        puntuacio = "Sense puntuació"   
-    print(f"{i}. {titol} | {preu_final[2:]} £ | Puntuació: {puntuacio}") # Elimino els dos primers caracters perquè el símbol de lliure d'origen no es codifi
-    nou_llibre = { # Crea el diccionari per a aquest llibre amb les tres claus
+        puntuacio = "5/5"    
+    print(f"{i}. {titol} | {preu_final[2:]} £ | Puntuació: {puntuacio}") # Elimino els dos primers caracters perquè el símbol de lliure d'origen no es codifica bé
+    nou_llibre = {
         "titol": titol,
-        "preu": preu_final,
+        "preu": preu,
         "puntuacio": puntuacio,
     }
-    llibres.append(nou_llibre) # Afegeix el diccionari a la llista de llibres.
+    llibres.append(nou_llibre)
 
+    # Afegir la puntuació de cada llibre
+    # Desar els resultats en un fitxer llibres.json (utilitzant json.dump). Cada llibre com un diccionari amb titol, preu i puntuacio
+    # <p class="star-rating One">
+ 
 try:
     with open('llibres.json', 'w') as fitxer: ## Obre agenda.json en mode escriptura per actualitzar-lo.
-        json.dump(llibres, fitxer, ensure_ascii=False, indent=4)
+        json.dump(llibres, fitxer, ensure_ascii=False, indent=4) ## Bolca el contingut actualitzat d'agenda al json sobreescrivint el contingut previ.
 except PermissionError:
     print("No tens permisos per desar el fitxer.")
 except OSError:
     print("Error del sistema.")
+
