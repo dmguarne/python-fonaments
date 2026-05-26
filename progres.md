@@ -5,7 +5,7 @@
 - **Nivell assignat:** PRINCIPIANT**→INTERMEDI** (transició en curs)
 - **Objectiu:** Curiositat i feina
 - **Hores setmanals:** 10
-- **Risc detectat:** Tutorial hell — tendència a consumir sense construir *(risc eliminat: 8 sessions consecutives construint codi real)*
+- **Risc detectat:** Tutorial hell — tendència a consumir sense construir *(risc eliminat: 9 sessions consecutives construint codi real)*
 
 ---
 
@@ -14,22 +14,23 @@
 | Skill | Nivell | Evidència | Proper pas |
 |-------|--------|-----------|------------|
 | Python — Variables | 5/10 | Aplicades amb autonomia en múltiples scripts | — |
-| Python — Tipus | 6/10 | Casting fluid, detecció proactiva de tipus | — |
-| Python — Condicions | 6/10 | Aplicades amb condicionals per `media_type` | Combinació complexa |
-| Python — Bucles | 7/10 | `enumerate` amb `start=1` aplicat autònomament | Llistes per comprensió |
+| Python — Tipus | 6/10 | Casting fluid, tipus correctes al JSON | — |
+| Python — Condicions | 6/10 | Aplicades autònomament i combinades | Combinació complexa |
+| Python — Bucles | 8/10 | Paginació amb patró fetch-process-fetch, lògica de condició | Llistes per comprensió |
 | Python — Llistes | 7/10 | Llistes de diccionaris, accés encadenat | Llistes per comprensió |
-| Python — Funcions | 7/10 | `return`, Single Responsibility, paràmetres vs globals | Funcions amb valors per defecte |
-| Python — Diccionaris | 5/10 | Accés encadenat, llistes de diccionaris | Diccionaris niats |
+| Python — Funcions | 7/10 | Diccionari de conversió, Single Responsibility | Funcions amb valors per defecte |
+| Python — Diccionaris | 6/10 | Diccionari com a taula de conversió, accés encadenat | Diccionaris niats |
 | Python — Fitxers | 5/10 | `try/except` per lectura i escriptura | Modes avançats |
-| Python — JSON | 5/10 | `json.load`, `json.dump`, APIs reals | JSON amb múltiples APIs |
-| Python — Errors | 6/10 | `try/except` amb xarxa, estructura correcta dins `try` | Errors personalitzats |
-| Python — Strings | 5/10 | Slicing deduït autònomament: `text[2:]` | Mètodes de string |
-| requests | 4/10 | GET, `status_code`, `.json()`, variables d'entorn | POST, headers |
-| BeautifulSoup | 4/10 | `find`, `find_all`, atributs, cerca dins element | Paginació, scraping avançat |
-| Seguretat | 3/10 | Variables d'entorn, consciència de claus exposades, historial Git | `.env` files, secrets management |
-| Terminal | 5/10 | Navegació autònoma, `.bashrc`, `export` | Permisos i pipes |
-| Git | 6/10 | Push a GitHub, flux complet, commits descriptius | Branques |
-| Web | 2/10 | HTML bàsic, inspecció d'elements amb DevTools | DevTools avançat |
+| Python — JSON | 6/10 | 1000 registres guardats, tipus correctes | JSON amb múltiples APIs |
+| Python — Errors | 6/10 | `try/except` amb xarxa, estructura correcta | Errors personalitzats |
+| Python — Strings | 5/10 | Slicing, f-strings per URLs dinàmiques | Mètodes de string |
+| requests | 5/10 | Paginació, gestió de codis d'estat, 50 peticions seqüencials | POST, headers |
+| BeautifulSoup | 5/10 | Classes múltiples, accés a atributs, cerca dins element | Scraping avançat |
+| Entorns virtuals | 3/10 | Creació, activació, `pip install` dins entorn | `deactivate`, gestió avançada |
+| Seguretat | 3/10 | Variables d'entorn, `.gitignore`, consciència de dades exposades | `.env` files |
+| Terminal | 6/10 | Operador `>`, `.gitignore`, fitxers ocults, `pip freeze` | Permisos i pipes |
+| Git | 6/10 | `.gitignore`, `requirements.txt`, flux complet | Branques |
+| Web | 2/10 | HTML bàsic, classes múltiples, inspecció DevTools | DevTools avançat |
 | OSINT | 3/10 | Google ops | Automatitzar |
 
 ---
@@ -304,13 +305,47 @@ Sessió de maduresa tècnica real. Ha passat de scripts locals a parlar amb serv
 
 ---
 
+## SESSIÓ 9 — Resum
+
+**Data:** 26/05/2026
+
+**Contingut treballat:**
+- Classes múltiples en HTML: `class="star-rating Three"` són dues classes independents
+- BeautifulSoup retorna classes com a llista: `element["class"]` → `["star-rating", "Three"]`
+- Diccionari de conversió com a alternativa escalable a cadenes d'`if/elif`
+- Tipus de dades al JSON: guardar enters operables, no strings presentacionals
+- Paginació: construcció dinàmica de URLs amb f-string
+- Patró fetch-process-fetch: petició al final del bucle per condició sempre actualitzada
+- `while/else` vs `if/else` fora del bucle per gestionar el final de la paginació
+- Eliminació de variables innecessàries (`ordre`) quan el context canvia
+- Entorns virtuals (`venv`): creació, activació, instal·lació de llibreries aïllades
+- `pip freeze > requirements.txt`: documentar dependències amb l'operador `>`
+- `.gitignore`: excloure `entorn/` i fitxers locals de Git
+- Fitxers ocults a Linux (comencen per `.`): cal `git add .gitignore` explícitament
+
+**Projecte construït:**
+- `scraping_03.py` versió final — 1000 llibres de 50 pàgines amb títol, preu i puntuació numèrica guardats a `llibres.json`
+- Entorn virtual configurat amb `requirements.txt` i `.gitignore`
+
+**Errors principals:**
+- JSON creixent infinitament per llegir el fitxer existent abans d'afegir (resolt inicialitzant `llibres = []` fora del bucle)
+- Petició duplicada a la pàgina 1 (resolt amb patró fetch-process-fetch)
+- `response` de la condició obsoleta per petició al principi del bucle (resolt movent-la al final)
+- Nom de funció igual que variable interna: `def conversio` + `conversio = {}` (corregit a `equivalencies`)
+- Puntuació guardada com a string `"3 estrelles"` en lloc d'enter `3` (corregit)
+
+**Transferència autònoma destacada:**
+Ha identificat que la pàgina 1 seguia el mateix patró URL que la resta abans d'assumir un cas especial. Ha eliminat la variable `ordre` autònomament en detectar que ja no era necessària. Ha raonat correctament la lògica del `while/else` sense ajuda. ⭐⭐
+
+**Observació del tutor:**
+Sessió de consolidació i salt qualitatiu: de scrapar una pàgina a scrapar una web sencera amb 1000 registres. El patró fetch-process-fetch és un dels més recurrents en programació de xarxa i l'ha interioritzat bé. L'entorn virtual configurat correctament marca l'inici del treball professional. Preparat per a `argparse` i arguments de línia de comandes.
+
+---
+
 ## DEURES PENDENTS
 
-- Ampliar `scraping_03.py`:
-  - Afegir la **puntuació** de cada llibre (`"One"`, `"Two"`... a l'HTML)
-  - Guardar resultats a `llibres.json` amb `json.dump` — cada llibre com a diccionari amb `titol`, `preu` i `puntuacio`
-  - `git commit` i `git push`
-- **Investigar entorns virtuals** (`venv`): per a què serveixen i com es creen (sense implementar encara)
+- Investigar **`argparse`**: per a què serveix i com s'usa bàsicament
+- Pensar com modificar `scraping_03.py` perquè accepti un argument `--pagina-inici` des del terminal per reprendre el scraping des d'una pàgina concreta
 
 ---
 
@@ -326,7 +361,8 @@ Sessió de maduresa tècnica real. Ha passat de scripts locals a parlar amb serv
 | 5-6 | Terminal Linux, Git (push a GitHub) | ✅ Completat |
 | 6-7 | Gestió d'errors (`try/except`), validació robusta | ✅ Completat |
 | 7-8 | Scraping, `requests`, BeautifulSoup, APIs reals | ✅ Completat |
-| 8-9 | Entorns virtuals, scraping avançat, paginació | ⏳ Pendent |
+| 8-9 | Entorns virtuals, scraping avançat, paginació | ✅ Completat |
+| 9-10 | `argparse`, arguments de línia de comandes, scraping avançat | ⏳ Pendent |
 
 ### FASE 2 — Web i APIs *(pendent)*
 ### FASE 3 — Sistemes i Linux *(pendent)*
