@@ -15,7 +15,7 @@ try:
         elif media == "video":
             missatge_media = "El vídeo del dia és: "
         else: # Per si de cas hi ha tipus d'arxiu diferents de imatge o vídeo
-            missatge:media = "El document del dia és"
+            missatge_media = "El document del dia és"
         print(f"Data: {data}\n{missatge_media} {dades['title']} i l'enllaç és {dades["url"]}") ## Imprimeix les claus tipus, títol i url.
     else:
         print(response.status_code) ## Si la resposta del servidor no és 200, informa del codi de resposta.
