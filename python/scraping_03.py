@@ -1,7 +1,7 @@
 import json
 import requests
 import argparse
-import eines.utils as utils
+import eines
 from bs4 import BeautifulSoup
 
 if __name__ == "__main__":
