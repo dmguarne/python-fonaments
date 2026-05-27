@@ -15,7 +15,7 @@ Scripts inicials:
 - agenda_persistent: Petit gestor de contactes fet en Python amb persistència de dades mitjançant JSON.
 - scraping_03: Prova de scraping que obté un llistat de llibres i el desa a un JSON.
 
-## Tecnologies utilitzades
+## Tecnologies utilitzades:
 
 - Python 3
 - JSON
