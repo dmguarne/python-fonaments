@@ -1,22 +1,14 @@
 import json
 import requests
 import argparse
+import eines.utils as utils
 from bs4 import BeautifulSoup
 
 parser = argparse.ArgumentParser() # Crea l'objecte parser
 parser.add_argument("--pagina-inici", type=int, default=1) # Crea l'argument --pagina-inici i li dona tipus int i valor 1 per defecte.
+parser.add_argument("--pagina-fi", type=int, default=100)
 
 arguments = parser.parse_args() # Defineix el mètode que analitza l'argument introduït en el terminal.
-
-def conversio(numero): # Funció per convertir una paraula en número. L'argument que agafa és la paraula.
-    equivalencies = { # Diccionari d'equivalències.
-        "One" : 1,        
-        "Two" : 2,
-        "Three" : 3,
-        "Four" : 4,
-        "Five" : 5,
-    }
-    return equivalencies[numero] # Retorna el valor associat a la clau.
 
 try:
     with open("llibres.json", "r") as fitxer: ## Obre agenda.json i el llegeix a fitxer.
@@ -29,8 +21,9 @@ except json.JSONDecodeError:
 
 try:
     pagina = arguments.pagina_inici # Emmagatzema a pagina el numero rebut com a argument a arguments.    
+    final = arguments.pagina_fi
     response = requests.get(f"https://books.toscrape.com/catalogue/page-{pagina}.html")    
-    while response.status_code == 200: ## Si la resposta del servidor és positiva, executa el codi.        
+    while response.status_code == 200 and pagina <= final: ## Si la resposta del servidor és positiva, executa el codi.        
         print(f"Pàgina {pagina}/50")
         soup = BeautifulSoup(response.text, "html.parser")
         elements = soup.find_all("article", class_="product_pod") # Retorna una llista amb tots els objectes "article".
@@ -45,7 +38,7 @@ try:
                 nou_llibre = { # Crea el diccionari per a aquest llibre amb les tres claus
                     "titol": titol,
                     "preu": preu_final[2:],
-                    "puntuacio": conversio(estrelles),
+                    "puntuacio": utils.conversio(estrelles),
                 }
                 llibres.append(nou_llibre) # Afegeix el diccionari a la llista de llibres.
         pagina += 1

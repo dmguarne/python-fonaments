@@ -5,7 +5,7 @@
 - **Nivell assignat:** PRINCIPIANT**→INTERMEDI** (transició en curs)
 - **Objectiu:** Curiositat i feina
 - **Hores setmanals:** 10
-- **Risc detectat:** Tutorial hell — tendència a consumir sense construir *(risc eliminat: 9 sessions consecutives construint codi real)*
+- **Risc detectat:** Tutorial hell — tendència a consumir sense construir *(risc eliminat: 10 sessions consecutives construint codi real)*
 
 ---
 
@@ -16,20 +16,21 @@
 | Python — Variables | 5/10 | Aplicades amb autonomia en múltiples scripts | — |
 | Python — Tipus | 6/10 | Casting fluid, tipus correctes al JSON | — |
 | Python — Condicions | 6/10 | Aplicades autònomament i combinades | Combinació complexa |
-| Python — Bucles | 8/10 | Paginació amb patró fetch-process-fetch, lògica de condició | Llistes per comprensió |
-| Python — Llistes | 7/10 | Llistes de diccionaris, accés encadenat | Llistes per comprensió |
+| Python — Bucles | 8/10 | Paginació amb patró fetch-process-fetch, lògica de condició | — |
+| Python — Llistes | 8/10 | Llistes per comprensió aplicades autònomament | Comprensió amb filtre |
 | Python — Funcions | 7/10 | Diccionari de conversió, Single Responsibility | Funcions amb valors per defecte |
 | Python — Diccionaris | 6/10 | Diccionari com a taula de conversió, accés encadenat | Diccionaris niats |
-| Python — Fitxers | 5/10 | `try/except` per lectura i escriptura | Modes avançats |
-| Python — JSON | 6/10 | 1000 registres guardats, tipus correctes | JSON amb múltiples APIs |
-| Python — Errors | 6/10 | `try/except` amb xarxa, estructura correcta | Errors personalitzats |
+| Python — Fitxers | 6/10 | Patró llegir→modificar→escriure consolidat | Modes avançats |
+| Python — JSON | 7/10 | Gestió de duplicats, patró llegir+escriure robust | JSON amb múltiples APIs |
+| Python — Errors | 7/10 | Distinció entre errors propis i errors de llibreria | Errors personalitzats |
 | Python — Strings | 5/10 | Slicing, f-strings per URLs dinàmiques | Mètodes de string |
+| argparse | 5/10 | Argument `--pagina-inici` amb `type` i `default` | Múltiples arguments, flags |
 | requests | 5/10 | Paginació, gestió de codis d'estat, 50 peticions seqüencials | POST, headers |
 | BeautifulSoup | 5/10 | Classes múltiples, accés a atributs, cerca dins element | Scraping avançat |
-| Entorns virtuals | 3/10 | Creació, activació, `pip install` dins entorn | `deactivate`, gestió avançada |
-| Seguretat | 3/10 | Variables d'entorn, `.gitignore`, consciència de dades exposades | `.env` files |
-| Terminal | 6/10 | Operador `>`, `.gitignore`, fitxers ocults, `pip freeze` | Permisos i pipes |
-| Git | 6/10 | `.gitignore`, `requirements.txt`, flux complet | Branques |
+| Entorns virtuals | 5/10 | Entorn nou creat per projecte, `requirements.txt` actualitzat | Gestió avançada |
+| Seguretat | 4/10 | Token revocat i renovat ràpidament, consciència de secrets exposats | `.env` files |
+| Terminal | 7/10 | `git add -A`, patrons `.gitignore`, reorganització de directoris | Permisos i pipes |
+| Git | 7/10 | Moviments de fitxers, `.gitignore` avançat, flux complet | Branques |
 | Web | 2/10 | HTML bàsic, classes múltiples, inspecció DevTools | DevTools avançat |
 | OSINT | 3/10 | Google ops | Automatitzar |
 
@@ -157,28 +158,25 @@ Sessió excel·lent. Autonomia creixent i molt notable. El salt qualitatiu més 
 **Data:** 21/05/2026
 
 **Contingut treballat:**
-- Revisió i depuració de `agenda.py` (deures de la sessió 4)
-- Detecció i correcció de variable global dins funció — passar-ho com a paràmetre
-- Accés encadenat a llistes de diccionaris: `agenda[i]["clau"]`
-- `return` vs `print`: diferència conceptual i pràctica
-- Principi Single Responsibility: cada funció fa una cosa
-- Tensió DRY vs Single Responsibility — resolució per disseny
-- Codi autodocumentat: el nom de la funció com a documentació
-- `enumerate()` — introduït per investigació autònoma
+- Llistes de diccionaris: estructura, creació, accés encadenat `llista[i]["clau"]`
+- Funció que retorna un diccionari: encapsulació de la creació d'un contacte
+- Menú interactiu amb `while True` i `break`
+- Patró bandera per a l'esborrat: buscar primer, esborrar després
+- Fitxers de text: `open()`, modes `'r'`, `'w'`, `'a'`, context manager `with`
+- Persistència bàsica: guardar i llegir una llista de noms
 
 **Projecte construït:**
-- `agenda.py` final — llista de diccionaris, dues funcions (`mostrar_persona` amb `return`, `mostrar_agenda`), cerca per nom amb patró bandera
+- `agenda.py` — agenda de contactes amb menú interactiu, afegir/mostrar/cercar/esborrar, persistència en fitxer de text
 
 **Errors principals:**
-- `if trobat == False` en lloc de `if not trobat` (corregit)
-- Variable global `agenda` dins `mostrar_persona` sense paràmetre (detectat i corregit)
-- `return(f"...")` amb parèntesis innecessaris (corregit)
+- `agenda[i]` en lloc de `agenda[i]["nom"]` per accedir al nom dins el diccionari
+- Indentació incorrecta del `break` (fora del `if` en lloc de dins)
 
 **Transferència autònoma destacada:**
-Ha raonat autònomament la tensió entre DRY i Single Responsibility. Ha defensat decisions de disseny amb argumentació tècnica real ("depèn de per a què serveixi"). ⭐⭐⭐
+Ha proposat espontàniament guardar els contactes en un fitxer per no perdre'ls en tancar el programa. Ha implementat el menú complet amb totes les opcions sense guia pas a pas. ⭐⭐
 
 **Observació del tutor:**
-Sessió de maduresa. El salt no és de sintaxi sinó conceptual: ha après a pensar en responsabilitats i a prendre decisions de disseny conscients. Progressió que justifica revisar el nivell assignat cap a intermedi en les properes sessions.
+Primera agenda funcional amb persistència. La proposta espontània de persistència demostra que el pensament va més enllà de l'exercici immediat. Preparat per a JSON i persistència estructurada.
 
 ---
 
@@ -187,40 +185,23 @@ Sessió de maduresa. El salt no és de sintaxi sinó conceptual: ha après a pen
 **Data:** 22/05/2026
 
 **Contingut treballat:**
-- Repàs i aplicació definitiva de `enumerate()` amb `start=1`
-- Debat DRY vs Single Responsibility — resolució argumentada autònomament
-- Recuperació de `mostrar_persona` per centralitzar el format (DRY aplicat)
-- El problema de la persistència: per què les dades desapareixen en tancar el programa
-- Fitxers: modes `"r"`, `"w"`, `"a"` i diferències pràctiques
-- Sintaxi `with open ... as fitxer` — per què és la forma correcta
-- Model mental fonamental: fitxer vs memòria (llegir → memòria → modificar → guardar)
-- Serialització: per què no es pot escriure una llista directament a un fitxer
-- JSON: estructura, similitud amb diccionaris Python, format estàndard d'APIs
-- `import json` — primer ús d'un mòdul de la biblioteca estàndard
-- `json.dump()` amb `ensure_ascii=False` i `indent=4`
-- `json.load()` per recuperar estructures Python des d'un fitxer
-- Tipus de dades al JSON: `input()` retorna `str`, cal `int()` per guardar enters
-- Script de correcció de tipus en un JSON existent
-- Referència vs còpia: modificar un diccionari dins un bucle modifica l'original
-- Variables globals dins funcions: per què son perilloses, solució amb paràmetres
-- Recursió i stack overflow: quan usar-la i quan substituir-la per `while`
-- Bug lògic `or` vs `and` en condicions de negació múltiple
-- Inicialització correcta de variables de control (`accio = "0"` vs `accio = int`)
+- JSON: format, sintaxi, diferència amb diccionari Python
+- `json.dumps()` vs `json.dump()`: string vs fitxer
+- `json.loads()` vs `json.load()`: des de string vs des de fitxer
+- `ensure_ascii=False` i `indent=4` per a fitxers llegibles
+- Migració de `agenda.py` a `agenda_persistent.py` amb JSON
+- Deures autònoms: `agenda_persistent_v2.py` amb múltiples contactes i validació
 
 **Projectes construïts:**
-- `agenda_persistent.py` — programa complet amb menú interactiu, afegir i esborrar contactes, persistència JSON, funcions autosuficients
-- `refactoritzar_agenda.py` — script de correcció de tipus al JSON existent
+- `agenda_persistent.py` — agenda amb persistència JSON
+- `agenda_persistent_v2.py` (deures) — versió ampliada amb múltiples contactes, telèfon, recursió per tornar al menú
 
 **Errors principals:**
-- Malentès inicial sobre modificar fitxers directament (resolt amb model mental)
-- Tres blocs `with open` en lloc de dos (refactoritzat)
-- Variables globals dins funcions (corregit afegint paràmetres)
-- Recursió sense límit a `eliminar_contacte` (substituïda per `while` amb bandera)
-- `if repetir != "S" or repetir != "s"` — condició sempre `True` (corregit a `and`)
-- `accio = int` — assignació de funció en lloc de valor (corregit a `accio = "0"`)
+- `json.load()` sobre fitxer buit retorna error (resolt amb `try/except`)
+- Confusió inicial entre `dumps`/`loads` (string) i `dump`/`load` (fitxer)
 
 **Transferència autònoma destacada:**
-Ha afegit menú interactiu complet sense que el tutor ho demanés. Ha usat recursió per primera vegada de forma espontània. Ha detectat i corregit el bug `or` vs `and` autònomament. Ha construït el script de correcció de tipus completament sol. ⭐⭐⭐
+Ha construït `agenda_persistent_v2.py` amb recursió espontània sense que el tutor ho demanés. Ha afegit camp telèfon i validació d'entrada de forma autònoma. ⭐⭐⭐
 
 **Observació del tutor:**
 Sessió excepcional. Ha entregat els deures i ha construït un programa molt més ambiciós del que se li demanava. La recursió espontània demostra que el pensament algorítmic està madur. Preparat per a `try/except` i push a GitHub.
@@ -342,10 +323,45 @@ Sessió de consolidació i salt qualitatiu: de scrapar una pàgina a scrapar una
 
 ---
 
+## SESSIÓ 10 — Resum
+
+**Data:** 27/05/2026
+
+**Contingut treballat:**
+- `argparse`: flux complet — `ArgumentParser()`, `add_argument()`, `parse_args()`, accés a `arguments.nom`
+- `type=` i `default=` a `add_argument()`
+- Conversió automàtica de guions a guions baixos en noms d'arguments
+- Regla: no cal `try/except` sobre el que les llibreries ja gestionen internament
+- Llistes per comprensió: sintaxi `[expressió for element in col·lecció]`, equivalent al bucle `for` + `.append()`
+- Aplicació de llistes per comprensió per extreure valors d'una llista de diccionaris
+- Gestió de duplicats al scraper: llegir JSON existent + comprovar per títol + escriure tot de nou
+- Per què `'w'` i no `'a'` per a fitxers JSON (mode append trenca l'estructura)
+- `git add -A`: registra supressions, addicions i moviments de fitxers
+- Patrons genèrics al `.gitignore`: `entorn*` per cobrir qualsevol entorn virtual
+- Incident real: token de GitHub exposat al xat → revocat i renovat immediatament
+- Reorganització del directori de projectes: subcarpeta `python/` per a exercicis
+
+**Projecte construït:**
+- `scraping_03.py` versió final amb `argparse` (`--pagina-inici`) i gestió de duplicats per títol
+
+**Errors principals:**
+- `try/except` innecessari al voltant de `parse_args()` (eliminat — `argparse` gestiona els seus errors)
+- `KeyError: 'titol'` per copy-paste d'`agenda.json` en lloc de `llibres.json` (detectat autònomament)
+- Token de GitHub exposat públicament al xat (revocat i renovat immediatament)
+- Fitxers moguts sense `git add -A` (resolt amb `git add -A`)
+
+**Transferència autònoma destacada:**
+Ha detectat el `KeyError` ell sol amb depuració mental sense necessitar el `print()` de diagnòstic suggerit. Ha raonat correctament per què cal `'w'` i no `'a'` per a JSON, i ha identificat la solució (llegir→modificar→escriure) per analogia amb `agenda_persistent.py`. ⭐⭐
+
+**Observació del tutor:**
+Sessió productiva amb un incident de seguretat real gestionat correctament — el millor aprenentatge és el que costa. Les llistes per comprensió s'han introduït de forma orgànica en context real. El raonament per analogia (agenda→scraper) demostra que els patrons s'estan consolidant transversalment. Preparat per a mòduls propis i estructura de projecte.
+
+---
+
 ## DEURES PENDENTS
 
-- Investigar **`argparse`**: per a què serveix i com s'usa bàsicament
-- Pensar com modificar `scraping_03.py` perquè accepti un argument `--pagina-inici` des del terminal per reprendre el scraping des d'una pàgina concreta
+- Afegir un segon argument `--pagina-fi` a `scraping_03.py` per definir també la pàgina final
+- Investigar el concepte de **mòduls propis** a Python: com es crea un fitxer `.py` que s'importa des d'un altre
 
 ---
 
@@ -362,7 +378,8 @@ Sessió de consolidació i salt qualitatiu: de scrapar una pàgina a scrapar una
 | 6-7 | Gestió d'errors (`try/except`), validació robusta | ✅ Completat |
 | 7-8 | Scraping, `requests`, BeautifulSoup, APIs reals | ✅ Completat |
 | 8-9 | Entorns virtuals, scraping avançat, paginació | ✅ Completat |
-| 9-10 | `argparse`, arguments de línia de comandes, scraping avançat | ⏳ Pendent |
+| 9-10 | `argparse`, llistes per comprensió, gestió de duplicats | ✅ Completat |
+| 10-11 | Mòduls propis, `__init__.py`, estructura de projecte | ⏳ Pendent |
 
 ### FASE 2 — Web i APIs *(pendent)*
 ### FASE 3 — Sistemes i Linux *(pendent)*
