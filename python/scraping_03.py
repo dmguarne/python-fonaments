@@ -44,7 +44,7 @@ if __name__ == "__main__":
                             "puntuacio": utils.conversio(estrelles),
                         }
                         llibres.append(nou_llibre) # Afegeix el diccionari a la llista de llibres.
-                except TypeError as e:
+                except (utils.CadenaInvalida, utils.ClauInvalida, utils.LlistaInvalida, utils.PuntuacioInvalida) as e:
                     print(f"Error: {e} | Programa finalitzat.")
                     exit()
             pagina += 1
