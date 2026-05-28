@@ -150,11 +150,6 @@
         "puntuacio": 4
     },
     {
-        "titol": "The Four Agreements: A Practical Guide to Personal Freedom",
-        "preu": "17.66",
-        "puntuacio": 5
-    },
-    {
         "titol": "The Five Love Languages: How to Express Heartfelt Commitment to Your Mate",
         "preu": "31.05",
         "puntuacio": 3
@@ -4992,6 +4987,11 @@
     {
         "titol": "1,000 Places to See Before You Die",
         "preu": "26.08",
+        "puntuacio": 5
+    },
+    {
+        "titol": "The Four Agreements: A Practical Guide to Personal Freedom",
+        "preu": "17.66",
         "puntuacio": 5
     }
 ]

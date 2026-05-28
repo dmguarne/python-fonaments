@@ -36,13 +36,17 @@ if __name__ == "__main__":
                 preu_final = preu.text # Agafa el text que hi ha dins l'etiqueta "p"
                 puntuacio = article.find("p")
                 estrelles = puntuacio["class"][1]
-                if not utils.cerca_llista(titol, "titol", llibres): 
-                    nou_llibre = { # Crea el diccionari per a aquest llibre amb les tres claus
-                        "titol": titol,
-                        "preu": preu_final[2:],
-                        "puntuacio": utils.conversio(estrelles),
-                    }
-                    llibres.append(nou_llibre) # Afegeix el diccionari a la llista de llibres.
+                try:
+                    if not utils.cerca_llista(titol, "titol", llibres):
+                        nou_llibre = { # Crea el diccionari per a aquest llibre amb les tres claus
+                            "titol": titol,
+                            "preu": preu_final[2:],
+                            "puntuacio": utils.conversio(estrelles),
+                        }
+                        llibres.append(nou_llibre) # Afegeix el diccionari a la llista de llibres.
+                except TypeError as e:
+                    print(f"Error: {e} | Programa finalitzat.")
+                    exit()
             pagina += 1
             response = requests.get(f"https://books.toscrape.com/catalogue/page-{pagina}.html")
         if response.status_code == 403 or response.status_code == 404: # Si la pàgina no existeix, atura el bucle i informa l'usuari.
