@@ -2,6 +2,7 @@ import json
 import requests
 import argparse
 import eines
+from eines import utils
 from bs4 import BeautifulSoup
 
 if __name__ == "__main__":
@@ -35,7 +36,7 @@ if __name__ == "__main__":
                 preu_final = preu.text # Agafa el text que hi ha dins l'etiqueta "p"
                 puntuacio = article.find("p")
                 estrelles = puntuacio["class"][1]
-                if not titol in [llibre["titol"] for llibre in llibres]:
+                if not utils.cerca_llista(titol, "titol", llibres): 
                     nou_llibre = { # Crea el diccionari per a aquest llibre amb les tres claus
                         "titol": titol,
                         "preu": preu_final[2:],

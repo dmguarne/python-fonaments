@@ -5,7 +5,7 @@
 - **Nivell assignat:** PRINCIPIANT**→INTERMEDI** (transició en curs)
 - **Objectiu:** Curiositat i feina
 - **Hores setmanals:** 10
-- **Risc detectat:** Tutorial hell — tendència a consumir sense construir *(risc eliminat: 10 sessions consecutives construint codi real)*
+- **Risc detectat:** Tutorial hell — tendència a consumir sense construir *(risc eliminat: 11 sessions consecutives construint codi real)*
 
 ---
 
@@ -17,19 +17,20 @@
 | Python — Tipus | 6/10 | Casting fluid, tipus correctes al JSON | — |
 | Python — Condicions | 6/10 | Aplicades autònomament i combinades | Combinació complexa |
 | Python — Bucles | 8/10 | Paginació amb patró fetch-process-fetch, lògica de condició | — |
-| Python — Llistes | 8/10 | Llistes per comprensió aplicades autònomament | Comprensió amb filtre |
-| Python — Funcions | 7/10 | Diccionari de conversió, Single Responsibility | Funcions amb valors per defecte |
+| Python — Llistes | 9/10 | Llistes per comprensió en funció genèrica reutilitzable | — |
+| Python — Funcions | 8/10 | Funció genèrica `cerca_llista()`, simplificació pythònica | Funcions amb valors per defecte |
 | Python — Diccionaris | 6/10 | Diccionari com a taula de conversió, accés encadenat | Diccionaris niats |
 | Python — Fitxers | 6/10 | Patró llegir→modificar→escriure consolidat | Modes avançats |
 | Python — JSON | 7/10 | Gestió de duplicats, patró llegir+escriure robust | JSON amb múltiples APIs |
-| Python — Errors | 7/10 | Distinció entre errors propis i errors de llibreria | Errors personalitzats |
+| Python — Errors | 7/10 | Distinció entre errors propis i errors de llibreria | Errors personalitzats, `raise` |
 | Python — Strings | 5/10 | Slicing, f-strings per URLs dinàmiques | Mètodes de string |
-| argparse | 5/10 | Argument `--pagina-inici` amb `type` i `default` | Múltiples arguments, flags |
+| Python — Mòduls | 7/10 | Paquet propi, `__init__.py`, imports relatius, `if __name__` | Estructura de projecte gran |
+| argparse | 6/10 | Dos arguments (`--pagina-inici`, `--pagina-fi`) amb `type` i `default` | Flags booleans |
 | requests | 5/10 | Paginació, gestió de codis d'estat, 50 peticions seqüencials | POST, headers |
 | BeautifulSoup | 5/10 | Classes múltiples, accés a atributs, cerca dins element | Scraping avançat |
 | Entorns virtuals | 5/10 | Entorn nou creat per projecte, `requirements.txt` actualitzat | Gestió avançada |
 | Seguretat | 4/10 | Token revocat i renovat ràpidament, consciència de secrets exposats | `.env` files |
-| Terminal | 7/10 | `git add -A`, patrons `.gitignore`, reorganització de directoris | Permisos i pipes |
+| Terminal | 7/10 | `git add -A` vs `git add *`, criteri correcte d'ús | Permisos i pipes |
 | Git | 7/10 | Moviments de fitxers, `.gitignore` avançat, flux complet | Branques |
 | Web | 2/10 | HTML bàsic, classes múltiples, inspecció DevTools | DevTools avançat |
 | OSINT | 3/10 | Google ops | Automatitzar |
@@ -360,8 +361,39 @@ Sessió productiva amb un incident de seguretat real gestionat correctament — 
 
 ## DEURES PENDENTS
 
-- Afegir un segon argument `--pagina-fi` a `scraping_03.py` per definir també la pàgina final
-- Investigar el concepte de **mòduls propis** a Python: com es crea un fitxer `.py` que s'importa des d'un altre
+- Aplicar `raise` a `conversio()` o `cerca_llista()` per gestionar entrades invàlides
+
+---
+
+## SESSIÓ 11 — Resum
+
+**Data:** 27/05/2026
+
+**Contingut treballat:**
+- Mòduls propis: creació de `utils.py` i importació amb `import eines.utils as utils`
+- Paquets: carpeta `eines/` amb `__init__.py`, `from . import utils`
+- Imports relatius: per què Python 3 requereix el punt explícit dins de paquets
+- `if __name__ == "__main__"`: separar codi executable de codi importable
+- `__pycache__`: què és, per què es genera i com ignorar-lo al `.gitignore`
+- `git add *` vs `git add -A`: criteri correcte d'ús (no mecànic)
+- Funció `cerca_llista(terme, clau, llista)` a `utils.py`: lògica genèrica reutilitzable
+- Simplificació pythònica: `return expressió_booleana` en lloc d'`if/else` amb `True/False`
+
+**Projectes construïts:**
+- `eines/utils.py` — mòdul propi amb `conversio()` i `cerca_llista()`
+- `eines/__init__.py` — paquet configurat amb import relatiu
+- `scraping_03.py` refactoritzat amb `if __name__ == "__main__"` i `import eines.utils`
+
+**Errors principals:**
+- `import utils` dins del paquet en lloc de `from . import utils` (corregit)
+- `cerca_llista()` usant `terme` com a clau i valor alhora (corregit separant en dos paràmetres)
+- `if/else` retornant `True/False` explícitament (simplificat a `return terme in [...]`)
+
+**Transferència autònoma destacada:**
+Ha deduït correctament que `__init__.py` "reconeix el directori com a mòdul". Ha qüestionat el comportament de VSCode en refactoritzar l'import (instint correcte). Ha raonat per si sol per què el `else` del `if __name__` s'executaria en importar, no en executar. ⭐⭐
+
+**Observació del tutor:**
+Sessió de maduresa estructural: el codi ja no és un script pla sinó un projecte organitzat amb paquets, mòduls i separació clara entre executable i importable. El raonament crític sobre el comportament de VSCode i sobre `if __name__` demostra que l'alumne ja no segueix instruccions cegament — les avalua. Preparat per a `raise` i errors personalitzats.
 
 ---
 
@@ -379,7 +411,8 @@ Sessió productiva amb un incident de seguretat real gestionat correctament — 
 | 7-8 | Scraping, `requests`, BeautifulSoup, APIs reals | ✅ Completat |
 | 8-9 | Entorns virtuals, scraping avançat, paginació | ✅ Completat |
 | 9-10 | `argparse`, llistes per comprensió, gestió de duplicats | ✅ Completat |
-| 10-11 | Mòduls propis, `__init__.py`, estructura de projecte | ⏳ Pendent |
+| 10-11 | Mòduls propis, `__init__.py`, estructura de projecte | ✅ Completat |
+| 11-12 | `raise`, errors personalitzats, robustesa de mòduls | ⏳ Pendent |
 
 ### FASE 2 — Web i APIs *(pendent)*
 ### FASE 3 — Sistemes i Linux *(pendent)*
