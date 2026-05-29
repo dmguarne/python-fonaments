@@ -5,7 +5,7 @@
 - **Nivell assignat:** PRINCIPIANT**→INTERMEDI** (transició en curs)
 - **Objectiu:** Curiositat i feina
 - **Hores setmanals:** 10
-- **Risc detectat:** Tutorial hell — tendència a consumir sense construir *(risc eliminat: 12 sessions consecutives construint codi real)*
+- **Risc detectat:** Tutorial hell — tendència a consumir sense construir *(risc eliminat: 14 sessions consecutives construint codi real)*
 
 ---
 
@@ -19,17 +19,17 @@
 | Python — Bucles | 8/10 | Paginació amb patró fetch-process-fetch, lògica de condició | — |
 | Python — Llistes | 9/10 | Llistes per comprensió en funció genèrica reutilitzable | — |
 | Python — Funcions | 8/10 | Funció genèrica `cerca_llista()`, simplificació pythònica | Funcions amb valors per defecte |
-| Python — Diccionaris | 6/10 | Diccionari com a taula de conversió, accés encadenat | Diccionaris niats |
+| Python — Diccionaris | 6/10 | Diccionari com a taula de conversió, accés encadenat niat | Diccionaris niats complexos |
 | Python — Fitxers | 6/10 | Patró llegir→modificar→escriure consolidat | Modes avançats |
 | Python — JSON | 7/10 | Gestió de duplicats, patró llegir+escriure robust | JSON amb múltiples APIs |
-| Python — Errors | 8/10 | `raise TypeError` amb missatges descriptius, `except as e`, `exit()` | `ValueError`, errors personalitzats amb classe pròpia |
+| Python — Errors | 9/10 | Classes d'errors personalitzades (`CadenaInvalida`, `ClauInvalida`, `LlistaInvalida`, `PuntuacioInvalida`), captura múltiple, raonament sobre captura excessiva | Classes d'error amb atributs propis |
 | Python — Strings | 5/10 | Slicing, f-strings per URLs dinàmiques | Mètodes de string |
 | Python — Mòduls | 7/10 | Paquet propi, `__init__.py`, imports relatius, `if __name__` | Estructura de projecte gran |
 | argparse | 6/10 | Dos arguments (`--pagina-inici`, `--pagina-fi`) amb `type` i `default` | Flags booleans |
-| requests | 5/10 | Paginació, gestió de codis d'estat, 50 peticions seqüencials | POST, headers |
+| requests | 7/10 | GET autenticat amb headers, `raise_for_status()`, captura `HTTPError`+`ConnectionError`, accés a dades niades | POST, timeout, paginació d'APIs |
 | BeautifulSoup | 5/10 | Classes múltiples, accés a atributs, cerca dins element | Scraping avançat |
 | Entorns virtuals | 5/10 | Entorn nou creat per projecte, `requirements.txt` actualitzat | Gestió avançada |
-| Seguretat | 4/10 | Token revocat i renovat ràpidament, consciència de secrets exposats | `.env` files |
+| Seguretat | 6/10 | `.env` + `python-dotenv` + `os.environ.get` aplicat a projecte real amb token GitHub | Àmbits de tokens, OAuth |
 | Terminal | 7/10 | `git add -A` vs `git add *`, criteri correcte d'ús | Permisos i pipes |
 | Git | 7/10 | Moviments de fitxers, `.gitignore` avançat, flux complet | Branques |
 | Web | 2/10 | HTML bàsic, classes múltiples, inspecció DevTools | DevTools avançat |
@@ -175,71 +175,66 @@ Sessió molt productiva. La deducció autònoma sobre la necessitat de les funci
 - Oblidar el `break` al menú (bucle infinit)
 
 **Transferència autònoma destacada:**
-Ha identificat per si sol que cal llegir el JSON abans d'afegir per no sobreescriure'l. ⭐
+Ha identificat per si sol que calia un `try/except` per al primer ús (fitxer inexistent). ⭐⭐
 
 **Observació del tutor:**
-Primera sessió amb persistència real. El patró llegir→modificar→escriure és fonamental i s'ha après en context real.
+Primera aplicació de persistència real. L'agenda ja és un programa funcional complet.
 
 ---
 
 ## SESSIÓ 6 — Resum
 
-**Data:** 23/05/2026
+**Data:** 22/05/2026
 
 **Contingut treballat:**
-- Gestió d'errors multiexcepció: `FileNotFoundError`, `json.JSONDecodeError`, `ValueError`, `PermissionError`, `OSError`
-- Validació robusta d'input: patró `valid = False` / `while not valid` / `try sets valid = True`
-- Idioma pythònic `while not nom` per comprovar strings buits
-- Git remote: creació de repositori GitHub, Personal Access Token, primer `git push`
+- Terminal Linux: navegació, `pwd`, `ls`, `cd`, `mkdir`, `rm`, `cp`, `mv`
+- Permisos bàsics: `chmod +x`
+- Git avançat: `git log`, `git diff`, `git stash`, branques conceptuals
+- GitHub: creació de repositori remot, `git remote add origin`, `git push`
+- Personal Access Token: creació, ús, revocació
+- `.gitignore`: patrons, fitxers locals, per què ignorar `__pycache__`
 
 **Projecte construït:**
-- `agenda_persistent.py` versió robusta amb gestió completa d'errors i validació d'input
+- Repositori `python-fonaments` publicat a GitHub amb primer push
 
 **Errors principals:**
-- `try/except` sense `while` (no reintentava l'input després de l'error)
-- Detectat i corregit autònomament ⭐
+- Token exposat al xat (detectat i revocat immediatament)
 
 **Observació del tutor:**
-Ha autoidentificat el bug del `try` sense `while` i l'ha corregit sol. Primera connexió real amb GitHub.
+Incident de seguretat real gestionat correctament. La millor manera d'aprendre seguretat és patir-ne les conseqüències de forma controlada.
 
 ---
 
 ## SESSIÓ 7 — Resum
 
-**Data:** 24/05/2026
+**Data:** 23/05/2026
 
 **Contingut treballat:**
-- Repàs i consolidació de la gestió d'errors de la sessió anterior
-- Revisió del flux Git complet (add, commit, push)
-- README.md: estructura bàsica en Markdown
+- Gestió d'errors avançada: multi-excepció (`FileNotFoundError`, `json.JSONDecodeError`, `ValueError`, `PermissionError`, `OSError`)
+- Validació robusta: patró `while not valid` + `try/except` per forçar input correcte
+- Idioma pythònic: `while not nom` per comprovar cadena buida
+- Git remote: push a GitHub amb token, gestió de credencials
 
-**Deures assignats:**
-- Crear README.md per al projecte
-- Investigar la llibreria `requests`
+**Projecte construït:**
+- `agenda_persistent.py` versió robusta amb multi-excepció i validació d'input
+
+**Transferència autònoma destacada:**
+Ha detectat que el `try/except` sense `while` no resolia el problema i l'ha corregit autònomament. ⭐⭐
 
 ---
 
 ## SESSIÓ 8 — Resum
 
-**Data:** 25/05/2026
+**Data:** 24/05/2026
 
 **Contingut treballat:**
-- Llibreria `requests`: `requests.get()`, `response.status_code`, `response.text`, `response.json()`
-- APIs públiques: estructura de resposta JSON, accés a camps niats
-- Seguretat: API keys, riscos d'exposar secrets, bones pràctiques
-- BeautifulSoup: `find()`, `find_all()`, accés a atributs, text d'elements
-- Inspecció HTML amb DevTools per identificar elements
-- Slicing `[2:]` per netejar prefixos (£, Â)
+- Web scraping: concepte, HTML, inspecció DevTools
+- `requests`: GET bàsic, `response.text`, codis d'estat
+- BeautifulSoup: `find`, `find_all`, accés a atributs, `.text`
+- Primer scraper funcional
 
 **Projecte construït:**
-- `scraping_01.py` — primera petició real a una API
-- `scraping_02.py` — scraping de books.toscrape.com: títol, preu, puntuació
-
-**Transferència autònoma destacada:**
-Ha explorat l'estructura de la resposta de l'API abans d'escriure el codi. Ha aplicat slicing `[2:]` per resoldre un problema d'encoding sense que el tutor li ho expliqués. Ha inspeccionat l'HTML autònomament per identificar l'element pare correcte. ⭐⭐⭐
-
-**Observació del tutor:**
-Sessió de maduresa tècnica real. Ha passat de scripts locals a parlar amb serveis d'internet i extreure dades de webs reals. La lliçó de seguretat de les API keys és de les que no s'obliden. El slicing deduït autònomament és un indicador clar que el pensament algorítmic està consolidat. Preparat per a entorns virtuals i scraping avançat amb paginació.
+- `scraping_01.py` — títol i preu del primer llibre de books.toscrape.com
 
 ---
 
@@ -248,35 +243,27 @@ Sessió de maduresa tècnica real. Ha passat de scripts locals a parlar amb serv
 **Data:** 26/05/2026
 
 **Contingut treballat:**
-- Classes múltiples en HTML: `class="star-rating Three"` són dues classes independents
-- BeautifulSoup retorna classes com a llista: `element["class"]` → `["star-rating", "Three"]`
-- Diccionari de conversió com a alternativa escalable a cadenes d'`if/elif`
-- Tipus de dades al JSON: guardar enters operables, no strings presentacionals
-- Paginació: construcció dinàmica de URLs amb f-string
-- Patró fetch-process-fetch: petició al final del bucle per condició sempre actualitzada
-- `while/else` vs `if/else` fora del bucle per gestionar el final de la paginació
-- Eliminació de variables innecessàries (`ordre`) quan el context canvia
-- Entorns virtuals (`venv`): creació, activació, instal·lació de llibreries aïllades
-- `pip freeze > requirements.txt`: documentar dependències amb l'operador `>`
+- Scraping de pàgina completa: tots els elements d'una pàgina
+- Classes múltiples a BeautifulSoup
+- Diccionari de conversió per a dades categòriques (puntuació en paraules → nombre)
+- Patró fetch-process-fetch per paginació
+- Entorns virtuals: creació, activació, `pip install`, `requirements.txt`
 - `.gitignore`: excloure `entorn/` i fitxers locals de Git
-- Fitxers ocults a Linux (comencen per `.`): cal `git add .gitignore` explícitament
 
 **Projecte construït:**
-- `scraping_03.py` versió final — 1000 llibres de 50 pàgines amb títol, preu i puntuació numèrica guardats a `llibres.json`
+- `scraping_03.py` versió final — 1000 llibres de 50 pàgines guardats a `llibres.json`
 - Entorn virtual configurat amb `requirements.txt` i `.gitignore`
 
 **Errors principals:**
-- JSON creixent infinitament per llegir el fitxer existent abans d'afegir (resolt inicialitzant `llibres = []` fora del bucle)
-- Petició duplicada a la pàgina 1 (resolt amb patró fetch-process-fetch)
-- `response` de la condició obsoleta per petició al principi del bucle (resolt movent-la al final)
-- Nom de funció igual que variable interna: `def conversio` + `conversio = {}` (corregit a `equivalencies`)
-- Puntuació guardada com a string `"3 estrelles"` en lloc d'enter `3` (corregit)
+- `response` de la condició obsoleta per petició al principi del bucle
+- Nom de funció igual que variable interna
+- Puntuació guardada com a string en lloc d'enter
 
 **Transferència autònoma destacada:**
-Ha identificat que la pàgina 1 seguia el mateix patró URL que la resta abans d'assumir un cas especial. Ha eliminat la variable `ordre` autònomament en detectar que ja no era necessària. Ha raonat correctament la lògica del `while/else` sense ajuda. ⭐⭐
+Ha identificat que la pàgina 1 seguia el mateix patró URL. Ha eliminat la variable `ordre` autònomament. ⭐⭐
 
 **Observació del tutor:**
-Sessió de consolidació i salt qualitatiu: de scrapar una pàgina a scrapar una web sencera amb 1000 registres. El patró fetch-process-fetch és un dels més recurrents en programació de xarxa i l'ha interioritzat bé. L'entorn virtual configurat correctament marca l'inici del treball professional. Preparat per a `argparse` i arguments de línia de comandes.
+Salt qualitatiu: de scrapar una pàgina a scrapar una web sencera amb 1000 registres.
 
 ---
 
@@ -289,29 +276,26 @@ Sessió de consolidació i salt qualitatiu: de scrapar una pàgina a scrapar una
 - `type=` i `default=` a `add_argument()`
 - Conversió automàtica de guions a guions baixos en noms d'arguments
 - Regla: no cal `try/except` sobre el que les llibreries ja gestionen internament
-- Llistes per comprensió: sintaxi `[expressió for element in col·lecció]`, equivalent al bucle `for` + `.append()`
-- Aplicació de llistes per comprensió per extreure valors d'una llista de diccionaris
+- Llistes per comprensió: sintaxi `[expressió for element in col·lecció]`
 - Gestió de duplicats al scraper: llegir JSON existent + comprovar per títol + escriure tot de nou
-- Per què `'w'` i no `'a'` per a fitxers JSON (mode append trenca l'estructura)
+- Per què `'w'` i no `'a'` per a fitxers JSON
 - `git add -A`: registra supressions, addicions i moviments de fitxers
-- Patrons genèrics al `.gitignore`: `entorn*` per cobrir qualsevol entorn virtual
+- Patrons genèrics al `.gitignore`: `entorn*`
 - Incident real: token de GitHub exposat al xat → revocat i renovat immediatament
-- Reorganització del directori de projectes: subcarpeta `python/` per a exercicis
 
 **Projecte construït:**
-- `scraping_03.py` versió final amb `argparse` (`--pagina-inici`) i gestió de duplicats per títol
+- `scraping_03.py` versió final amb `argparse` i gestió de duplicats per títol
 
 **Errors principals:**
-- `try/except` innecessari al voltant de `parse_args()` (eliminat — `argparse` gestiona els seus errors)
-- `KeyError: 'titol'` per copy-paste d'`agenda.json` en lloc de `llibres.json` (detectat autònomament)
-- Token de GitHub exposat públicament al xat (revocat i renovat immediatament)
-- Fitxers moguts sense `git add -A` (resolt amb `git add -A`)
+- `try/except` innecessari al voltant de `parse_args()`
+- `KeyError: 'titol'` per copy-paste (detectat autònomament)
+- Token de GitHub exposat públicament
 
 **Transferència autònoma destacada:**
-Ha detectat el `KeyError` ell sol amb depuració mental sense necessitar el `print()` de diagnòstic suggerit. Ha raonat correctament per què cal `'w'` i no `'a'` per a JSON, i ha identificat la solució (llegir→modificar→escriure) per analogia amb `agenda_persistent.py`. ⭐⭐
+Ha detectat el `KeyError` sol amb depuració mental. Ha raonat correctament per què cal `'w'` i no `'a'`. ⭐⭐
 
 **Observació del tutor:**
-Sessió productiva amb un incident de seguretat real gestionat correctament — el millor aprenentatge és el que costa. Les llistes per comprensió s'han introduït de forma orgànica en context real. El raonament per analogia (agenda→scraper) demostra que els patrons s'estan consolidant transversalment. Preparat per a mòduls propis i estructura de projecte.
+Incident de seguretat real gestionat correctament — el millor aprenentatge és el que costa.
 
 ---
 
@@ -325,25 +309,20 @@ Sessió productiva amb un incident de seguretat real gestionat correctament — 
 - Imports relatius: per què Python 3 requereix el punt explícit dins de paquets
 - `if __name__ == "__main__"`: separar codi executable de codi importable
 - `__pycache__`: què és, per què es genera i com ignorar-lo al `.gitignore`
-- `git add *` vs `git add -A`: criteri correcte d'ús (no mecànic)
-- Funció `cerca_llista(terme, clau, llista)` a `utils.py`: lògica genèrica reutilitzable
-- Simplificació pythònica: `return expressió_booleana` en lloc d'`if/else` amb `True/False`
+- `git add *` vs `git add -A`: criteri correcte d'ús
+- Funció `cerca_llista(terme, clau, llista)` a `utils.py`
+- Simplificació pythònica: `return expressió_booleana`
 
 **Projectes construïts:**
 - `eines/utils.py` — mòdul propi amb `conversio()` i `cerca_llista()`
 - `eines/__init__.py` — paquet configurat amb import relatiu
-- `scraping_03.py` refactoritzat amb `if __name__ == "__main__"` i `import eines.utils`
-
-**Errors principals:**
-- `import utils` dins del paquet en lloc de `from . import utils` (corregit)
-- `cerca_llista()` usant `terme` com a clau i valor alhora (corregit separant en dos paràmetres)
-- `if/else` retornant `True/False` explícitament (simplificat a `return terme in [...]`)
+- `scraping_03.py` refactoritzat
 
 **Transferència autònoma destacada:**
-Ha deduït correctament que `__init__.py` "reconeix el directori com a mòdul". Ha qüestionat el comportament de VSCode en refactoritzar l'import (instint correcte). Ha raonat per si sol per què el `else` del `if __name__` s'executaria en importar, no en executar. ⭐⭐
+Ha deduït que `__init__.py` "reconeix el directori com a mòdul". Ha raonat per si sol el comportament de `if __name__`. ⭐⭐
 
 **Observació del tutor:**
-Sessió de maduresa estructural: el codi ja no és un script pla sinó un projecte organitzat amb paquets, mòduls i separació clara entre executable i importable. El raonament crític sobre el comportament de VSCode i sobre `if __name__` demostra que l'alumne ja no segueix instruccions cegament — les avalua. Preparat per a `raise` i errors personalitzats.
+Sessió de maduresa estructural: el codi ja és un projecte organitzat amb paquets.
 
 ---
 
@@ -352,37 +331,95 @@ Sessió de maduresa estructural: el codi ja no és un script pla sinó un projec
 **Data:** 28/05/2026
 
 **Contingut treballat:**
-- Consolidació llistes per comprensió: ordre d'execució (llista primer, `in` després), redundància de `f"{clau}"`
+- Consolidació llistes per comprensió
 - `raise`: concepte, sintaxi, diferència amb `try/except`
 - `TypeError` vs `ValueError`: quan usar cada un
-- Validació amb `if/elif` + `raise` per argument independent (missatges descriptius i granulars)
-- `except TypeError as e` + `print(e)`: capturar i mostrar el missatge del `raise`
-- `exit()` vs `break`: decisió conscient d'aturar el programa per errors de programació
+- Validació amb `if/elif` + `raise` per argument independent
+- `except TypeError as e` + `print(e)`
+- `exit()` vs `break`
 - Per què un sol `try/except` cobreix dues funcions en el mateix bloc
-- Principi DRY aplicat a `try/except` niats innecessaris (detectat i eliminat)
+- Principi DRY aplicat a `try/except` niats innecessaris
 - `type()` vs `isinstance()`: diferència per herència
-- Herència a Python: `bool` com a subclasse d'`int`, implicacions pràctiques
+- Herència a Python: `bool` com a subclasse d'`int`
 
 **Projectes construïts:**
-- `eines/utils.py` — `conversio()` i `cerca_llista()` amb validació `raise TypeError` completa
-- `scraping_03.py` — `try/except TypeError as e` + `exit()` per capturar errors de mòdul
-
-**Errors principals:**
-- Instint inicial de `try/except` en lloc d'`if` + `raise` per a validació (corregit raonat)
-- `except TypeError` sense dos punts `:` (sintaxi)
-- `try/except` duplicat niat innecessari (eliminat aplicant DRY)
+- `eines/utils.py` — `conversio()` i `cerca_llista()` amb validació `raise TypeError`
+- `scraping_03.py` — `except TypeError as e` + `exit()`
 
 **Transferència autònoma destacada:**
-Ha qüestionat activament si el `try/except` cobria `conversio()` — instint de programador real. Ha raonat correctament la diferència `type()` vs `isinstance()` a partir del concepte d'herència. ⭐⭐
+Ha qüestionat activament si el `try/except` cobria `conversio()`. Ha raonat `type()` vs `isinstance()` a partir de l'herència. ⭐⭐
 
 **Observació del tutor:**
-Sessió de robustesa: el mòdul `utils.py` ara és defensiu — no accepta entrades invàlides silenciosament. La distinció `raise` vs `try/except` és una de les que separa el codi que funciona del codi que es pot mantenir. La comprensió de `type()` vs `isinstance()` a partir de l'herència demostra que el raonament conceptual s'aprofundeix. Preparat per a classes d'errors personalitzades.
+El mòdul `utils.py` ara és defensiu. La distinció `raise` vs `try/except` separa el codi que funciona del codi que es pot mantenir.
+
+---
+
+## SESSIÓ 13 — Resum
+
+**Data:** 28/05/2026
+
+**Contingut treballat:**
+- Classes d'errors personalitzades: sintaxi `class Nom(Exception): pass`
+- Herència d'`Exception`: per què és necessària, analogia amb `bool`→`int`
+- Nomenclatura semàntica: nom descriptiu del domini vs error genèric de Python
+- Ruta d'accés (`utils.CadenaInvalida`) vs nom de la classe (`CadenaInvalida`)
+- Captura múltiple: `except (ErrorA, ErrorB, ErrorC) as e`
+- Perill de captura excessiva: per què `except Exception` és un antipatró
+- Validació de valor de domini: `PuntuacioInvalida` per clau absent al diccionari
+- Ordre dins la funció: definir el diccionari abans de validar-hi la clau
+
+**Projectes construïts:**
+- `eines/utils.py` — quatre classes d'error personalitzades (`CadenaInvalida`, `ClauInvalida`, `LlistaInvalida`, `PuntuacioInvalida`) aplicades a `conversio()` i `cerca_llista()`
+- `scraping_03.py` — `except` actualitzat amb les quatre classes pròpies
+
+**Errors principals:**
+- Línia suelta fora de la funció (detectat autònomament)
+- Validació usant `equivalencies` abans de definir-lo (detectat autònomament)
+
+**Transferència autònoma destacada:**
+Ha explicat els dos motius per usar errors personalitzats abans de la micro-lliçó. Ha detectat i corregit ambdós errors del codi de forma autònoma. Ha raonat correctament per què `except Exception` és perillós. ⭐⭐⭐
+
+**Observació del tutor:**
+Sessió de maduresa en disseny: `utils.py` ja té una API pública clara amb errors propis, com qualsevol llibreria professional.
+
+---
+
+## SESSIÓ 14 — Resum
+
+**Data:** 29/05/2026
+
+**Contingut treballat:**
+- Model mental API REST vs scraping: canal oficial, estructurat, estable
+- Endpoints com a contracte: el servidor pot reorganitzar internament, l'endpoint és estable
+- Els 4 elements d'una crida API: URL, mètode HTTP, headers, body
+- `.env` + `python-dotenv` + `os.environ.get`: carregat amb pista mínima
+- GET autenticat amb headers: `{"Authorization": "Bearer TOKEN"}`
+- `resposta.json()`: parsejar resposta JSON
+- `raise_for_status()`: llença `HTTPError` automàticament per codis 4xx/5xx
+- Distinció `requests.exceptions.ConnectionError` vs `ConnectionError` built-in
+- Accés a dades niades: `element['commit']['author']['name']`
+- Iteració pythònica: `for element in dades` sense índex
+
+**Projecte construït:**
+- `api_github.py` — GET autenticat a l'API de GitHub, llista de commits amb data, autor i missatge; gestió robusta d'errors amb `raise_for_status()` i captura múltiple
+
+**Errors principals:**
+- `"Authorizacion"` (error tipogràfic al header) — detectat amb pista mínima
+- `resposta.json` sense parèntesis — detectat amb pista mínima
+- Parèntesi de tancament del `print` mal col·locat — detectat autònomament
+- `ConnectionError` built-in en lloc de `requests.exceptions.ConnectionError` — corregit amb explicació
+
+**Transferència autònoma destacada:**
+Ha construït el codi inicial quasi complet de forma autònoma ("no sé fer-ho" però el codi era quasi perfecte). Ha aplicat `raise_for_status()` + captura múltiple correctament al primer intent. ⭐⭐⭐
+
+**Observació del tutor:**
+Salt important: de scraping a API REST autenticada. El patró de gestió d'errors és ara professional. La seguretat amb `.env` s'ha interioritzat. Preparat per a POST i APIs amb autenticació avançada.
 
 ---
 
 ## DEURES PENDENTS
 
-- Investigar diferència entre `raise TypeError` i crear una **classe d'error personalitzada** (`class ErrorPersonalitzat(Exception)`) — preparació per a la propera sessió.
+- Investigar conceptualment (sense codi) **què és un POST** i en què es diferencia d'un GET. Pensa en un exemple concret del món real on caldria usar POST en lloc de GET.
 
 ---
 
@@ -402,7 +439,9 @@ Sessió de robustesa: el mòdul `utils.py` ara és defensiu — no accepta entra
 | 9-10 | `argparse`, llistes per comprensió, gestió de duplicats | ✅ Completat |
 | 10-11 | Mòduls propis, `__init__.py`, estructura de projecte | ✅ Completat |
 | 11-12 | `raise`, errors personalitzats, robustesa de mòduls | ✅ Completat |
-| 12-13 | Classes d'errors personalitzades, `ValueError`, errors de domini | ⏳ Pendent |
+| 12-13 | Classes d'errors personalitzades, captura múltiple, antipatrons | ✅ Completat |
+| 13-14 | APIs REST, `requests` avançat, autenticació, GET autenticat | ✅ Completat |
+| 14-15 | POST, body, APIs amb escriptura, autenticació avançada | ⏳ Pendent |
 
 ### FASE 2 — Web i APIs *(pendent)*
 ### FASE 3 — Sistemes i Linux *(pendent)*
