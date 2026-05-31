@@ -4,6 +4,13 @@ import argparse
 import eines
 from eines import utils
 from bs4 import BeautifulSoup
+from pathlib import Path
+
+# Ruta actual d'aquest fitxer:
+BASE = Path(__file__).parent
+
+# Ruta de 'llibres.json':
+ruta_llibres = BASE / "llibres.json"
 
 if __name__ == "__main__":
 
@@ -13,7 +20,7 @@ if __name__ == "__main__":
     arguments = parser.parse_args() # Defineix el mètode que analitza l'argument introduït en el terminal.
 
     try:
-        with open("llibres.json", "r") as fitxer: ## Obre agenda.json i el llegeix a fitxer.
+        with open(ruta_llibres, "r") as fitxer: ## Obre agenda.json i el llegeix a fitxer.
             llibres = json.load(fitxer) ## Estableix la variable agenda, que emmagatzema el contingut del fitxer
     except FileNotFoundError:
         llibres = []
@@ -58,7 +65,7 @@ if __name__ == "__main__":
             print(f"{i}. {linia['titol']} | {linia['preu']} £ | {linia['puntuacio']} estrelles")
     
         try:
-            with open('llibres.json', 'w') as fitxer: ## Obre agenda.json en mode escriptura per actualitzar-lo.
+            with open(ruta_llibres, 'w') as fitxer: ## Obre agenda.json en mode escriptura per actualitzar-lo.
                 json.dump(llibres, fitxer, ensure_ascii=False, indent=4)
         except PermissionError:
             print("No tens permisos per desar el fitxer.")
