@@ -5,7 +5,7 @@
 - **Nivell assignat:** PRINCIPIANT**→INTERMEDI** (transició en curs)
 - **Objectiu:** Curiositat i feina
 - **Hores setmanals:** 10
-- **Risc detectat:** Tutorial hell — tendència a consumir sense construir *(risc eliminat: 14 sessions consecutives construint codi real)*
+- **Risc detectat:** Tutorial hell — tendència a consumir sense construir *(risc eliminat: 15 sessions consecutives construint codi real)*
 
 ---
 
@@ -26,12 +26,14 @@
 | Python — Strings | 5/10 | Slicing, f-strings per URLs dinàmiques | Mètodes de string |
 | Python — Mòduls | 7/10 | Paquet propi, `__init__.py`, imports relatius, `if __name__` | Estructura de projecte gran |
 | argparse | 6/10 | Dos arguments (`--pagina-inici`, `--pagina-fi`) amb `type` i `default` | Flags booleans |
-| requests | 7/10 | GET autenticat amb headers, `raise_for_status()`, captura `HTTPError`+`ConnectionError`, accés a dades niades | POST, timeout, paginació d'APIs |
+| requests | 8/10 | POST amb `json=`, PATCH, codis HTTP (200/201/403), flux GET→POST→PATCH→GET, funció reutilitzable | timeout, paginació d'APIs |
 | BeautifulSoup | 5/10 | Classes múltiples, accés a atributs, cerca dins element | Scraping avançat |
 | Entorns virtuals | 5/10 | Entorn nou creat per projecte, `requirements.txt` actualitzat | Gestió avançada |
-| Seguretat | 6/10 | `.env` + `python-dotenv` + `os.environ.get` aplicat a projecte real amb token GitHub | Àmbits de tokens, OAuth |
+| Seguretat | 7/10 | Àmbits de tokens (scopes), 403 per permisos insuficients, token renovat amb permisos correctes | OAuth |
 | Terminal | 7/10 | `git add -A` vs `git add *`, criteri correcte d'ús | Permisos i pipes |
-| Git | 7/10 | Moviments de fitxers, `.gitignore` avançat, flux complet | Branques |
+| Git | 8/10 | `HEAD`/`main`/`origin/main` com a etiquetes de commits, branques com a decorats, sincronització push | Branques |
+| pathlib | 7/10 | `Path(__file__).parent`, operador `/`, `.exists()`, `.mkdir()`, rutes absolutes vs relatives | Mètodes avançats |
+| logging | 7/10 | Nivells INFO/WARNING/ERROR/CRITICAL, `basicConfig`, `StreamHandler` dual, integrat a scraping_03 | Handlers múltiples |
 | Web | 2/10 | HTML bàsic, classes múltiples, inspecció DevTools | DevTools avançat |
 | OSINT | 3/10 | Google ops | Automatitzar |
 
@@ -417,9 +419,72 @@ Salt important: de scraping a API REST autenticada. El patró de gestió d'error
 
 ---
 
+## SESSIÓ 15 — Resum
+
+**Data:** 30/05/2026
+
+**Contingut treballat:**
+- GET vs POST vs PATCH: diferències conceptuals i pràctiques
+- Idempotència: GET i PATCH no canvien l'estat repetidament, POST sí
+- Codis HTTP: 200 OK vs 201 Created vs 403 Forbidden, famílies 2xx/4xx/5xx
+- `json=` a `requests.post()`: serialització automàtica + `Content-Type: application/json`
+- POST a l'API de GitHub: crear issues amb `title` i `body`
+- PATCH a l'API de GitHub: modificar `state` d'una issue a `"closed"`
+- Caché de servidor: per què el segon GET pot semblar desfasat
+- Àmbits de tokens (scopes): 403 per permisos insuficients, renovació del token
+- Refactorització DRY: funció `comprovar_issues()` que retorna dades en lloc de només imprimir
+- Patró `if x in ("S", "s")` com a alternativa pythònica a `or`
+
+**Projecte construït:**
+- `api_github_post.py` — flux complet GET→POST→GET→PATCH→GET amb gestió robusta d'errors i inputs interactius
+
+**Errors principals:**
+- `json={"prova": "confirmat"}` — clau incorrecta per a l'API de GitHub (detectat amb pista)
+- PATCH duplicat per issue (detectat autònomament)
+- `{i}` a l'URL del PATCH en lloc de `{i['number']}` (detectat amb pista)
+- Funció sense `return` (detectat autònomament)
+- Token sense permisos d'escriptura → 403 (resolt autònomament)
+
+**Transferència autònoma destacada:**
+Ha detectat que la funció no retornava res i ha proposat la solució correcta. Ha simplificat `.append()` en bucle a `return issues` directament. Ha gestionat el 403 renovant el token de forma autònoma. ⭐⭐
+
+**Observació del tutor:**
+Primera sessió amb operacions d'escriptura a una API real. El flux GET→POST→PATCH és el patró central de qualsevol aplicació web. David ja el domina.
+
+---
+
+## SESSIÓ 16 — Resum
+
+**Data:** 31/05/2026
+
+**Contingut treballat:**
+- Revisió deures: `git push` confirmat, OAuth explicat correctament
+- OAuth: flux complet (lloc web redirigeix → usuari s'autentica a Google → Google envia token al lloc web)
+- Git: conceptes `HEAD`, `main`, `origin/main` com a etiquetes que apunten a commits; branques com a decorats sobre la mateixa carpeta
+- `pathlib`: `Path(__file__).parent`, operador `/`, rutes relatives vs absolutes, `.exists()`, `.mkdir(parents=True, exist_ok=True)`
+- `logging`: nivells INFO/WARNING/ERROR/CRITICAL, `basicConfig` amb `filename` i `format`, `StreamHandler` per sortida dual (fitxer + pantalla)
+- Integració de `pathlib` i `logging` al `scraping_03.py`
+
+**Projectes modificats:**
+- `scraping_03.py` — rutes migrades a `pathlib`, `print()` d'errors substituïts per `logging` amb nivells correctes, `StreamHandler` afegit
+
+**Errors principals:**
+- `ruda_dades` (NameError tipogràfic) — detectat autònomament
+- `.exists()` sobre el fitxer en lloc de la carpeta — detectat amb pregunta guiada
+
+**Transferència autònoma destacada:**
+- Ha afegit cas `elif response.status_code == 200 and pagina > final` sense que el tutor ho demanés ⭐⭐
+- Ha mantingut el `print()` de la llista de llibres correctament (informació per a l'usuari, no event de sistema) ⭐
+
+**Observació del tutor:**
+`scraping_03.py` és ara un script de producció: rutes robustes, log persistent, nivells semàntics correctes. La distinció `print` vs `logging` interioritzada sense explicació explícita.
+
+---
+
 ## DEURES PENDENTS
 
-- Investigar conceptualment (sense codi) **què és un POST** i en què es diferencia d'un GET. Pensa en un exemple concret del món real on caldria usar POST en lloc de GET.
+- Fer `git add`, `commit` i `push` dels canvis a `scraping_03.py` (pathlib + logging)
+- Investigar conceptualment: **què són les expressions regulars (regex)**? Pensa en un exemple del món real on hagis vist un patró de text (un email, un telèfon, una URL) i com descriuries aquest patró amb paraules.
 
 ---
 
@@ -458,3 +523,4 @@ Al iniciar sessió:
 2. Reprendre des dels deures pendents
 3. Actualitzar la taula de seguiment
 4. Generar nou progres.md al final
+

@@ -2,6 +2,7 @@ import json
 import requests
 import argparse
 import eines
+import logging
 from eines import utils
 from bs4 import BeautifulSoup
 from pathlib import Path
@@ -12,7 +13,19 @@ BASE = Path(__file__).parent
 # Ruta de 'llibres.json':
 ruta_llibres = BASE / "llibres.json"
 
+# Configuració del logging:
+logging.basicConfig(
+    filename=BASE / "scraping.log",
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
+# Afegeix també sortida per pantalla:
+logging.getLogger().addHandler(logging.StreamHandler())
+
+
 if __name__ == "__main__":
+
+    logging.info("Script iniciat")
 
     parser = argparse.ArgumentParser() # Crea l'objecte parser
     parser.add_argument("--pagina-inici", type=int, default=1) # Crea l'argument --pagina-inici i li dona tipus int i valor 1 per defecte.
@@ -25,7 +38,7 @@ if __name__ == "__main__":
     except FileNotFoundError:
         llibres = []
     except json.JSONDecodeError:
-        print("El fitxer agenda.json està corromput.")
+        logging.warning("El fitxer agenda.json està corromput.")
         llibres = []
 
     try:
@@ -33,7 +46,7 @@ if __name__ == "__main__":
         final = arguments.pagina_fi
         response = requests.get(f"https://books.toscrape.com/catalogue/page-{pagina}.html")    
         while response.status_code == 200 and pagina <= final: ## Si la resposta del servidor és positiva, executa el codi.        
-            print(f"Pàgina {pagina}/50")
+            logging.info(f"Pàgina {pagina}/50")
             soup = BeautifulSoup(response.text, "html.parser")
             elements = soup.find_all("article", class_="product_pod") # Retorna una llista amb tots els objectes "article".
             for i, article in enumerate(elements): # Recorre cada element de la llista
@@ -52,15 +65,17 @@ if __name__ == "__main__":
                         }
                         llibres.append(nou_llibre) # Afegeix el diccionari a la llista de llibres.
                 except (utils.CadenaInvalida, utils.ClauInvalida, utils.LlistaInvalida, utils.PuntuacioInvalida) as e:
-                    print(f"Error: {e} | Programa finalitzat.")
+                    logging.critical(f"Error: {e} | Programa finalitzat.")
                     exit()
             pagina += 1
             response = requests.get(f"https://books.toscrape.com/catalogue/page-{pagina}.html")
         if response.status_code == 403 or response.status_code == 404: # Si la pàgina no existeix, atura el bucle i informa l'usuari.
-            print("Navegació finalitzada.")
+            logging.info("Navegació finalitzada.")
+            logging.warning("Pàgina sense resultats")
+        elif response.status_code == 200 and pagina > final:
+            logging.info("Navegació finalitzada")
         else:
-            print(f"La pàgina {pagina} retorna el codi de servidor {response.status_code}") # Si el codi de resposta és un altre, n'informa l'usuari.
-
+            logging.warning(f"La pàgina {pagina} retorna el codi de servidor {response.status_code}") # Si el codi de resposta és un altre, n'informa l'usuari.            
         for i, linia in enumerate(llibres, start=1): # Agafa la llista llibres i enumera els seus elements (diccionaris).
             print(f"{i}. {linia['titol']} | {linia['preu']} £ | {linia['puntuacio']} estrelles")
     
@@ -68,10 +83,10 @@ if __name__ == "__main__":
             with open(ruta_llibres, 'w') as fitxer: ## Obre agenda.json en mode escriptura per actualitzar-lo.
                 json.dump(llibres, fitxer, ensure_ascii=False, indent=4)
         except PermissionError:
-            print("No tens permisos per desar el fitxer.")
+            logging.critical("No tens permisos per desar el fitxer.")
         except OSError:
-            print("Error del sistema.")
+            logging.critical("Error del sistema.")
 
     except ConnectionError: ## Si la connexió amb el servidor ha fallat, informa.
-        print("No s'ha pogut connectar amb el servidor")
+        logging.error("No s'ha pogut connectar amb el servidor")
 
