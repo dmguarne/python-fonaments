@@ -27,7 +27,8 @@
 | Python — Mòduls | 7/10 | Paquet propi, `__init__.py`, imports relatius, `if __name__` | Estructura de projecte gran |
 | argparse | 6/10 | Dos arguments (`--pagina-inici`, `--pagina-fi`) amb `type` i `default` | Flags booleans |
 | requests | 8/10 | POST amb `json=`, PATCH, codis HTTP (200/201/403), flux GET→POST→PATCH→GET, funció reutilitzable | timeout, paginació d'APIs |
-| BeautifulSoup | 5/10 | Classes múltiples, accés a atributs, cerca dins element | Scraping avançat |
+| BeautifulSoup | 7/10 | Navegació DOM amb `.parent`, accés a atributs `element["href"]`, scraping real de producció | Scraping avançat |
+| Regex | 6/10 | Sintaxi fonamental, patró complex de definició de funció, `re.search/match/findall`, raw strings, aplicació dins scraping | Grups de captura, substitució |
 | Entorns virtuals | 5/10 | Entorn nou creat per projecte, `requirements.txt` actualitzat | Gestió avançada |
 | Seguretat | 7/10 | Àmbits de tokens (scopes), 403 per permisos insuficients, token renovat amb permisos correctes | OAuth |
 | Terminal | 7/10 | `git add -A` vs `git add *`, criteri correcte d'ús | Permisos i pipes |
@@ -481,11 +482,6 @@ Primera sessió amb operacions d'escriptura a una API real. El flux GET→POST�
 
 ---
 
-## DEURES PENDENTS
-
-- Fer `git add`, `commit` i `push` dels canvis a `scraping_03.py` (pathlib + logging)
-- Investigar conceptualment: **què són les expressions regulars (regex)**? Pensa en un exemple del món real on hagis vist un patró de text (un email, un telèfon, una URL) i com descriuries aquest patró amb paraules.
-
 ---
 
 ## CURRÍCULUM
@@ -524,3 +520,48 @@ Al iniciar sessió:
 3. Actualitzar la taula de seguiment
 4. Generar nou progres.md al final
 
+
+## SESSIÓ 17 — Resum
+
+**Data:** 07/06/2026
+
+**Contingut treballat:**
+- Regex: concepte deduït per necessitat (vs implementació manual amb condicions)
+- Sintaxi regex: `\d`, `\w`, `\s`, `.`, `+`, `*`, `?`, `^`, `$`, `\(`, raw strings `r"..."`
+- Patró complex: definició de funció Python amb paràmetres opcionals `def\s\w+\((\w*,(\s)?)*\w*\):$`
+- `re.search` vs `re.match` vs `re.findall` — casos d'ús de cada funció
+- Arquitectura de projecte: disseny complet de `sahara_monitor` (connectors, eines, dades)
+- `connectors/scraping.py`: scraping de Sahara Press Service, extracció de titular/URL/data/font
+- Navegació DOM: `.parent` per accedir a elements fora de la jerarquia directa
+- Accés a atributs HTML: `element["href"]`
+- Aplicació de regex dins del scraping per extreure data (`re.search` + `.group()`)
+- `eines/magatzem.py`: persistència JSON amb deduplicació per URL, creació automàtica de carpetes
+- Logging centralitzat: problema del doble StreamHandler detectat i resolt
+
+**Projectes construïts:**
+- `regex_01.py` — detector de definicions de funcions Python amb regex
+- `sahara_monitor/connectors/scraping.py` — connector scraping Sahara Press Service
+- `sahara_monitor/eines/magatzem.py` — magatzem JSON amb deduplicació
+- `sahara_monitor/proves.py` — script de proves del flux complet
+
+**Errors principals:**
+- `noticia.find("href")` en lloc d'accés per atribut `element["href"]` — detectat autònomament
+- Llista per comprensió amb `.append()` redundant — detectat autònomament
+- Logging configurat a cada mòdul → doble StreamHandler — detectat i resolt amb raonament correcte
+
+**Transferència autònoma destacada:**
+- Ha aplicat regex per extreure la data dins del scraping sense que el tutor ho demanés ⭐⭐⭐
+- Ha raonat que `font` és estàtica i no cal scrapejar-la ⭐
+- Ha dissenyat l'arquitectura completa del projecte amb criteris propis (SRP, separació dades/codi) ⭐⭐
+
+**Observació del tutor:**
+Sessió de maduresa arquitectònica. El projecte `sahara_monitor` té disseny professional des del primer dia. La transferència de regex al scraping és el millor exemple fins ara d'aprenentatge connectat.
+
+---
+
+## DEURES PENDENTS
+
+- `git add`, `commit` i `push` del projecte `sahara_monitor`
+- Afegir paginació a `connectors/scraping.py`
+
+---
