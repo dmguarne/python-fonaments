@@ -1,4 +1,6 @@
 entorn*
 apunts/
+sahara_monitor/entorn*
 __pycache__/
 eines/entorn*
+.env
