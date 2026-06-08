@@ -3,3 +3,6 @@ entorn/
 dades/fonts/*
 dades/magatzem/*
 dades/sortides/*
+!dades/fonts/.gitkeep
+!dades/magatzem/.gitkeep
+!dades/sortides/.gitkeep
