@@ -1,0 +1,5 @@
+*.log
+entorn/
+dades/fonts/*
+dades/magatzem/*
+dades/sortides/*
